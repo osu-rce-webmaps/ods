@@ -455,24 +455,26 @@
       var schoolLayer201819 = datasets[3].forEach(function(d) {
         L.marker([d.Y, d.X], {}).bindPopup(
           "<b>" + d.School_Nam + "</b> <p>" +
-          "<b>Participate in Outdoor School in 2018-19?: </b>" + d.Participation2018 + "<br>" +
-          "<b>Outdoor School Provider in 2018-19: </b>" + d.Provider2018 + "<br>" +
+          "<b>Participate in Outdoor School in 2018-19?: </b>" + d.participation + "<br>" +
+          "<b>Outdoor School Provider in 2018-19: </b>" + d.ODS_Provider + "<br>" +
           "<b>School District: </b>" + d.SD + "<br>" +
           "<b>ESD: </b>" + d.ESD + "<br>" +
-          "<b>School Type: </b>" + d.ESD + "<br>" +
-          "<b>Website: </b>" + d.Website + "<br>"
+          "<b>ODS Region: </b>" + d.ods_region + "<br>" +
+          "<b>ODS Contact: </b>" + d.ods_coordinator + "<br>" +
+          "<b>ODS Contact Info: </b>" + d.ods_contact + "<br>"
         ).addTo(schools);
       })
 
       var schoolLayer201718 = datasets[4].forEach(function(d) {
         L.marker([d.Y, d.X], {}).bindPopup(
           "<b>" + d.School_Nam + "</b> <p>" +
-          "<b>Participate in Outdoor School in 2017-18?: </b>" + d.Participation2018 + "<br>" +
-          "<b>Outdoor School Provider in 2017-18: </b>" + d.Provider2018 + "<br>" +
+          "<b>Participate in Outdoor School in 2017-18?: </b>" + d.participation + "<br>" +
+          "<b>Outdoor School Provider in 2017-18: </b>" + d.ODS_Provider + "<br>" +
           "<b>School District: </b>" + d.SD + "<br>" +
           "<b>ESD: </b>" + d.ESD + "<br>" +
-          "<b>School Type: </b>" + d.ESD + "<br>" +
-          "<b>Website: </b>" + d.Website + "<br>"
+          "<b>ODS Region: </b>" + d.ods_region + "<br>" +
+          "<b>ODS Contact: </b>" + d.ods_coordinator + "<br>" +
+          "<b>ODS Contact Info: </b>" + d.ods_contact + "<br>"
         ).addTo(schools2);
       })
 
