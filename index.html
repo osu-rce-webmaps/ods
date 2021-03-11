@@ -145,7 +145,7 @@
       <div id="infobuttons">
         <!-- <span><a href="https://facebook.com/sharer.php?u=https://benjiantolin.github.io/law/" target="_blank"><i class="fab fa-facebook-square"></i></a></span>
         <span><a href="https://github.com/benjiantolin/law" target="_blank"><i class="fab fa-github-square"></i></a></span> -->
-        <span><a data-toggle="modal" data-target="#infowindow"><i class="nav fas fa-info-circle"></i></a></span>
+        <!-- <span><a data-toggle="modal" data-target="#infowindow"><i class="nav fas fa-info-circle"></i></a></span> -->
         <span><a href="http://127.0.0.1:3000/senate.html"><button type="button" class="btn btn-secondary">View Senate Districts</button></a></span>
       </div>
       <div id="title" style="font-size:1.5vw">Outdoor School Explorer - House Districts</div>
@@ -320,14 +320,20 @@
     var labelEngine = new labelgun.default(hideLabel, showLabel);
     var labels = [];
 
+    var oregonBounds = L.latLngBounds(
+      L.latLng(42, -124.8), //Southwest
+      L.latLng(46, -116.18) //Northeast
+    );
+
+
 
     var mymap = L.map('map', {
-      center: [44.25, -119.5],
+      // center: [44.25, -119.5],
       zoomControl: false,
-      zoom: 6,
+      zoom: 7,
       maxZoom: 15,
       minZoom: 3,
-    });
+    }).fitBounds(oregonBounds);
 
     new L.Control.zoomHome({
       position: 'topright'
@@ -1143,6 +1149,7 @@
         onEachFeature: onEachFeature
       }).addTo(mymap);
 
+      oregonBounds = county2.getBounds();
       var county1 = new L.GeoJSON(datasets[1], {
         style: style1,
         onEachFeature: onEachFeature
@@ -1407,8 +1414,9 @@
     });
 
 
-    mymap.setZoom(7);
+    mymap.setZoom(6);
 
+        mymap.setZoom(6);
 
     /////////////////////////
     $(".leaflet-control-attribution")
