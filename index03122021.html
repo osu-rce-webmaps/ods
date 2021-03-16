@@ -146,9 +146,9 @@
         <!-- <span><a href="https://facebook.com/sharer.php?u=https://benjiantolin.github.io/law/" target="_blank"><i class="fab fa-facebook-square"></i></a></span>
         <span><a href="https://github.com/benjiantolin/law" target="_blank"><i class="fab fa-github-square"></i></a></span> -->
         <!-- <span><a data-toggle="modal" data-target="#infowindow"><i class="nav fas fa-info-circle"></i></a></span> -->
-        <span><a href="https://osu-rce-webmaps.github.io/ods/index.html"><button type="button" class="btn btn-secondary">View House Districts</button></a></span>
+        <span><a href="https://osu-rce-webmaps.github.io/ods/senate.html"><button type="button" class="btn btn-secondary">View Senate Districts</button></a></span>
       </div>
-      <div id="title" style="font-size:1.5vw">Outdoor School Explorer - Senate Districts</div>
+      <div id="title" style="font-size:1.5vw">Outdoor School Explorer - House Districts</div>
 
 
       <p><span id="placename">Oregon State</span></p>
@@ -320,14 +320,20 @@
     var labelEngine = new labelgun.default(hideLabel, showLabel);
     var labels = [];
 
+    var oregonBounds = L.latLngBounds(
+      L.latLng(42, -124.8), //Southwest
+      L.latLng(46, -116.18) //Northeast
+    );
+
+
 
     var mymap = L.map('map', {
-      center: [44.25, -119.5],
+      // center: [44.25, -119.5],
       zoomControl: false,
-      zoom: 6,
+      zoom: 7,
       maxZoom: 15,
       minZoom: 3,
-    });
+    }).fitBounds(oregonBounds);
 
     new L.Control.zoomHome({
       position: 'topright'
@@ -431,9 +437,9 @@
 
 
     Promise.all([
-      d3.csv('assets/senateTimeseries.csv'), //datasets[0]
-      d3.json("assets/senateNewMin.geojson"), //datasets[1]
-      d3.csv('assets/senateProgramLength.csv'), //datasets[2]
+      d3.csv('assets/houseTimeseries.csv'), //datasets[0]
+      d3.json("assets/houseNewMin.geojson"), //datasets[1]
+      d3.csv('assets/houseProgLength.csv'), //datasets[2]
       d3.csv('assets/schools201819.csv'), //dataset [3]
       d3.csv('assets/schools201718.csv'), //dataset [4]
     ]).then(function(datasets) {
@@ -449,24 +455,26 @@
       var schoolLayer201819 = datasets[3].forEach(function(d) {
         L.marker([d.Y, d.X], {}).bindPopup(
           "<b>" + d.School_Nam + "</b> <p>" +
-          "<b>Participate in Outdoor School in 2018-19?: </b>" + d.Participation2018 + "<br>" +
-          "<b>Outdoor School Provider in 2018-19: </b>" + d.Provider2018 + "<br>" +
+          "<b>Participate in Outdoor School in 2018-19?: </b>" + d.participation + "<br>" +
+          "<b>Outdoor School Provider in 2018-19: </b>" + d.ODS_Provider + "<br>" +
           "<b>School District: </b>" + d.SD + "<br>" +
           "<b>ESD: </b>" + d.ESD + "<br>" +
-          "<b>School Type: </b>" + d.ESD + "<br>" +
-          "<b>Website: </b>" + d.Website + "<br>"
+          "<b>ODS Region: </b>" + d.ods_region + "<br>" +
+          "<b>ODS Contact: </b>" + d.ods_coordinator + "<br>" +
+          "<b>ODS Contact Info: </b>" + d.ods_contact + "<br>"
         ).addTo(schools);
       })
 
       var schoolLayer201718 = datasets[4].forEach(function(d) {
         L.marker([d.Y, d.X], {}).bindPopup(
           "<b>" + d.School_Nam + "</b> <p>" +
-          "<b>Participate in Outdoor School in 2017-18?: </b>" + d.Participation2018 + "<br>" +
-          "<b>Outdoor School Provider in 2017-18: </b>" + d.Provider2018 + "<br>" +
+          "<b>Participate in Outdoor School in 2017-18?: </b>" + d.participation + "<br>" +
+          "<b>Outdoor School Provider in 2017-18: </b>" + d.ODS_Provider + "<br>" +
           "<b>School District: </b>" + d.SD + "<br>" +
           "<b>ESD: </b>" + d.ESD + "<br>" +
-          "<b>School Type: </b>" + d.ESD + "<br>" +
-          "<b>Website: </b>" + d.Website + "<br>"
+          "<b>ODS Region: </b>" + d.ods_region + "<br>" +
+          "<b>ODS Contact: </b>" + d.ods_coordinator + "<br>" +
+          "<b>ODS Contact Info: </b>" + d.ods_contact + "<br>"
         ).addTo(schools2);
       })
 
@@ -484,12 +492,21 @@
       var ode5th = ["Number of 5th Graders During Fall Enrollment"]
       var ods6th = ["Number of 6th Graders Participating"]
       var ode6th = ["Number of 6th Graders During Fall Enrollment"]
-
+      var oneNil = ["1 Day 0 Nights"]
+      var oneOne = ["1 Day 1 Night"]
+      var twoNil = ["2 Days 0 Nights"]
+      var twoOne = ["2 Days 1 Night"]
       var threeNil = ["3 Days 0 Nights"]
-      var fourNil = ["4 Days 0 Nights"]
+      var threeOne = ["3 Days 1 Night"]
       var threeTwo = ["3 Days 2 Nights"]
+      var threeThree = ["3 Days 3 Nights"]
+      var fourNil = ["4 Days 0 Nights"]
+      var fourTwo = ["4 Days 2 Nights"]
       var fourThree = ["4 Days 3 Nights"]
+      var fourFive = ["4 Days 5 Nights"]
+      var fiveNil = ["5 Days 0 Nights"]
       var fiveFour = ["5 Days 4 Nights"]
+      var sixNil = ["6 Days 0 Nights"]
       var sixFive = ["6 Days 5 Nights"]
       var pL2018 = ["2017-18"]
       var pL2019 = ["2018-19"]
@@ -505,13 +522,21 @@
         ode5: ode5th,
         ods6: ods6th,
         ode6: ode6th,
-
+        one0: oneNil,
+        one1: oneOne,
+        two0: twoNil,
+        two1: twoOne,
         three0: threeNil,
-        four0: fourNil,
+        three1: threeOne,
         three2: threeTwo,
+        three3: threeThree,
+        four0: fourNil,
+        four2: fourTwo,
         four3: fourThree,
+        four5: fourFive,
+        five0: fiveNil,
         five4: fiveFour,
-
+        six0: sixNil,
         six5: sixFive,
         pL18: pL2018,
         pL19: pL2019,
@@ -520,17 +545,18 @@
 
       function stateCounts(i) {
         ts = 0, tstu = 0, tad = 0, ttreq = 0, treqs = 0,
-          tods5 = 0, tode5 = 0, tods6 = 0, tode6 = 0,
-          tthree0 = 0, tfour0 = 0, tthree2 = 0, tfour3 = 0,
-          tfive4 = 0, tsix5 = 0,
+          tods5 = 0, tode5 = 0, tods6 = 0, tode6 = 0, tone0 = 0,
+          tone1 = 0, ttwo0 = 0, ttwo1 = 0, tthree0 = 0, tthree1 = 0,
+          tthree2 = 0, tthree3 = 0, tfour0 = 0, tfour2 = 0, tfour3 = 0,
+          tfour5 = 0, tfive0 = 0, tfive4 = 0, tsix0 = 0, tsix5 = 0,
           tpl18 = 0, tpl19 = 0;
         datasets[0].forEach(function(d) {
           t.push(d["Year"]);
           ts = 0, tstu = 0, tad = 0, ttreq = 0, treqs = 0,
-            tods5 = 0, tode5 = 0, tods6 = 0, tode6 = 0,
-            tthree0 = 0, tfour0 = 0, tthree2 = 0, tfour3 = 0,
-            tfive4 = 0, tsix5 = 0,
-            tpl18 = 0, tpl19 = 0;
+            tods5 = 0, tode5 = 0, tods6 = 0, tode6 = 0, tone0 = 0,
+            tone1 = 0, ttwo0 = 0, ttwo1 = 0, tthree0 = 0, tthree1 = 0,
+            tthree2 = 0, tthree3 = 0, tfour0 = 0, tfour2 = 0, tfour3 = 0,
+            tfour5 = 0, tfive0 = 0, tfive4 = 0, tsix0 = 0, tsix5 = 0;
           current = d;
           delete current["Year"];
           if (i["name"] = "Oregon") {
@@ -540,18 +566,38 @@
             };
             items = d.split("-");
             switch (items.length) {
+              case 25:
+                tsix5 += +items[24];
+              case 24:
+                tsix0 += +items[23];
+              case 23:
+                tfive4 += +items[22];
+              case 22:
+                tfive0 += +items[21];
+              case 21:
+                tfour5 += +items[20];
+              case 20:
+                tfour3 += +items[19];
+              case 19:
+                tfour2 += +items[18];
+              case 18:
+                tfour0 += +items[17];
+              case 17:
+                tthree3 += +items[16];
+              case 16:
+                tthree2 += +items[15];
               case 15:
-                tsix5 += +items[14];
+                tthree1 += +items[14];
               case 14:
-                tfive4 += +items[13];
+                tthree0 += +items[13];
               case 13:
-                tfour3 += +items[12];
+                ttwo1 += +items[12];
               case 12:
-                tthree2 += +items[11];
+                ttwo0 += +items[11];
               case 11:
-                  tfour0 += +items[10];
+                tone1 += +items[10];
               case 10:
-                tthree0 += +items[9];
+                tone0 += +items[9];
               case 9:
                 tode6 += +items[8];
               case 8:
@@ -583,11 +629,21 @@
           i["ode5"].push(tode5);
           i["ods6"].push(tods6);
           i["ode6"].push(tode6);
+          i["one0"].push(tone0);
+          i["one1"].push(tone1);
+          i["two0"].push(ttwo0);
+          i["two1"].push(ttwo1);
           i["three0"].push(tthree0);
-          i["four0"].push(tfour0);
+          i["three1"].push(tthree1);
           i["three2"].push(tthree2);
+          i["three3"].push(tthree3);
+          i["four0"].push(tfour0);
+          i["four2"].push(tfour2);
           i["four3"].push(tfour3);
+          i["four5"].push(tfour5);
+          i["five0"].push(tfive0);
           i["five4"].push(tfive4);
+          i["six0"].push(tsix0);
           i["six5"].push(tsix5);
 
         });
@@ -651,17 +707,18 @@
 
       function countyCounts(i) {
         ts = 0, tstu = 0, tad = 0, ttreq = 0, treqs = 0,
-          tods5 = 0, tode5 = 0, tods6 = 0, tode6 = 0,
-          tthree0 = 0, tfour0 = 0, tthree2 = 0, tfour3 = 0,
-          tfive4 = 0, tsix5 = 0,
+          tods5 = 0, tode5 = 0, tods6 = 0, tode6 = 0, tone0 = 0,
+          tone1 = 0, ttwo0 = 0, ttwo1 = 0, tthree0 = 0, tthree1 = 0,
+          tthree2 = 0, tthree3 = 0, tfour0 = 0, tfour2 = 0, tfour3 = 0,
+          tfour5 = 0, tfive0 = 0, tfive4 = 0, tsix0 = 0, tsix5 = 0,
           tpl18 = 0, tpl19 = 0;
         datasets[0].forEach(function(d) {
           t.push(d["Year"]);
           ts = 0, tstu = 0, tad = 0, ttreq = 0, treqs = 0,
-            tods5 = 0, tode5 = 0, tods6 = 0, tode6 = 0,
-            tthree0 = 0, tfour0 = 0, tthree2 = 0, tfour3 = 0,
-            tfive4 = 0, tsix5 = 0,
-            tpl18 = 0, tpl19 = 0;
+            tods5 = 0, tode5 = 0, tods6 = 0, tode6 = 0, tone0 = 0,
+            tone1 = 0, ttwo0 = 0, ttwo1 = 0, tthree0 = 0, tthree1 = 0,
+            tthree2 = 0, tthree3 = 0, tfour0 = 0, tfour2 = 0, tfour3 = 0,
+            tfour5 = 0, tfive0 = 0, tfive4 = 0, tsix0 = 0, tsix5 = 0;
           current = d;
           delete current["Year"];
           if (i["name"] != "Oregon") {
@@ -671,18 +728,38 @@
             };
             items = d.split("-");
             switch (items.length) {
+              case 25:
+                tsix5 += +items[24];
+              case 24:
+                tsix0 += +items[23];
+              case 23:
+                tfive4 += +items[22];
+              case 22:
+                tfive0 += +items[21];
+              case 21:
+                tfour5 += +items[20];
+              case 20:
+                tfour3 += +items[19];
+              case 19:
+                tfour2 += +items[18];
+              case 18:
+                tfour0 += +items[17];
+              case 17:
+                tthree3 += +items[16];
+              case 16:
+                tthree2 += +items[15];
               case 15:
-                tsix5 += +items[14];
+                tthree1 += +items[14];
               case 14:
-                tfive4 += +items[13];
+                tthree0 += +items[13];
               case 13:
-                tfour3 += +items[12];
+                ttwo1 += +items[12];
               case 12:
-                tthree2 += +items[11];
+                ttwo0 += +items[11];
               case 11:
-                  tfour0 += +items[10];
+                tone1 += +items[10];
               case 10:
-                tthree0 += +items[9];
+                tone0 += +items[9];
               case 9:
                 tode6 += +items[8];
               case 8:
@@ -712,18 +789,38 @@
               };
               items = d.split("-");
               switch (items.length) {
+                case 25:
+                  tsix5 += +items[24];
+                case 24:
+                  tsix0 += +items[23];
+                case 23:
+                  tfive4 += +items[22];
+                case 22:
+                  tfive0 += +items[21];
+                case 21:
+                  tfour5 += +items[20];
+                case 20:
+                  tfour3 += +items[19];
+                case 19:
+                  tfour2 += +items[18];
+                case 18:
+                  tfour0 += +items[17];
+                case 17:
+                  tthree3 += +items[16];
+                case 16:
+                  tthree2 += +items[15];
                 case 15:
-                  tsix5 += +items[14];
+                  tthree1 += +items[14];
                 case 14:
-                  tfive4 += +items[13];
+                  tthree0 += +items[13];
                 case 13:
-                  tfour3 += +items[12];
+                  ttwo1 += +items[12];
                 case 12:
-                  tthree2 += +items[11];
+                  ttwo0 += +items[11];
                 case 11:
-                    tfour0 += +items[10];
+                  tone1 += +items[10];
                 case 10:
-                  tthree0 += +items[9];
+                  tone0 += +items[9];
                 case 9:
                   tode6 += +items[8];
                 case 8:
@@ -757,11 +854,21 @@
           i["ode5"].push(tode5);
           i["ods6"].push(tods6);
           i["ode6"].push(tode6);
+          i["one0"].push(tone0);
+          i["one1"].push(tone1);
+          i["two0"].push(ttwo0);
+          i["two1"].push(ttwo1);
           i["three0"].push(tthree0);
-          i["four0"].push(tfour0);
+          i["three1"].push(tthree1);
           i["three2"].push(tthree2);
+          i["three3"].push(tthree3);
+          i["four0"].push(tfour0);
+          i["four2"].push(tfour2);
           i["four3"].push(tfour3);
+          i["four5"].push(tfour5);
+          i["five0"].push(tfive0);
           i["five4"].push(tfive4);
+          i["six0"].push(tsix0);
           i["six5"].push(tsix5);
         });
 
@@ -912,7 +1019,7 @@
         var pL2019 = ["2018-19"]
 
         var place = {
-          name: e.target.feature.properties.SenateID,
+          name: e.target.feature.properties.house_geo,
           s: schoolsPar,
           stu: stuPar,
           ad: avgDays,
@@ -1044,6 +1151,7 @@
         onEachFeature: onEachFeature
       }).addTo(mymap);
 
+      oregonBounds = county2.getBounds();
       var county1 = new L.GeoJSON(datasets[1], {
         style: style1,
         onEachFeature: onEachFeature
@@ -1308,8 +1416,9 @@
     });
 
 
-    mymap.setZoom(7);
+    mymap.setZoom(6);
 
+        mymap.setZoom(6);
 
     /////////////////////////
     $(".leaflet-control-attribution")
