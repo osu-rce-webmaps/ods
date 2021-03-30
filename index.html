@@ -748,8 +748,7 @@
           "<b>School District: </b>" + d.SD + "<br>" +
           "<b>ESD: </b>" + d.ESD + "<br>" +
           "<b>ODS Region: </b>" + d.ods_region + "<br>" +
-          "<b>ODS Contact: </b>" + d.ods_coordinator + "<br>" +
-          "<b>ODS Contact Info: </b>" + d.ods_contact + "<br>"
+          "<b>ODS Contact: </b>" + "<a href=" + d.ods_contact + " target='_blank'>" + d.ods_coordinator + "</a>"
         ).addTo(schools1819);
         var stuPar = 0;
         var numDays = 0;
@@ -767,8 +766,7 @@
           "<b>School District: </b>" + d.SD + "<br>" +
           "<b>ESD: </b>" + d.ESD + "<br>" +
           "<b>ODS Region: </b>" + d.ods_region + "<br>" +
-          "<b>ODS Contact: </b>" + d.ods_coordinator + "<br>" +
-          "<b>ODS Contact Info: </b>" + d.ods_contact + "<br>"
+          "<b>ODS Contact: </b>" + "<a href=" + d.ods_contact + " target='_blank'>" + d.ods_coordinator + "</a>"
         ).addTo(schools1718);
         var stuPar = 0;
         var numDays = 0;
@@ -1820,9 +1818,9 @@
 
 
     /////////////////////////
-    $(".leaflet-control-attribution")
-      .css("background-color", "transparent")
-      .html("This map waas created using leaflet");
+    // $(".leaflet-control-attribution")
+    //   .css("background-color", "transparent")
+    //   .html("This map waas created using leaflet");
   </script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z4T8FDH7B0"></script>
