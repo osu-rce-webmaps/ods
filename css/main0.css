@@ -1,0 +1,141 @@
+@font-face {
+	font-family: 'stratum';
+	src: url('OSU_fonts/Stratum2-Regular.otf');
+}
+@font-face {
+	font-family: 'kievit';
+	src: url('OSU_fonts/KievitOffc.ttf');
+}
+
+html, body, main {
+  font-family: 'stratum';
+}
+
+.loader {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  z-index: 9999;
+  background: url('../img/loading.gif') 50% 50% no-repeat white;
+  opacity: 1;
+}
+#map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  top: 0%;
+  bottom: 0;
+  left: 0%;
+  right: 0;
+  margin: 0;
+  background: #fff;
+  font-family: 'kievit';
+  overflow: hidden
+}
+
+/* .leaflet-control-layers {
+  color: black !important;
+  background-color: none;
+  padding: 6px 8px;
+  border: none !important;
+  background: white !important;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 5px !important;
+} */
+
+.leaflet-control-zoom, .leaflet-control-zoom-in, .leaflet-control-zoom-out {
+  color: white !important;
+  padding: 0px !important;
+  background-color: none;
+  border: none !important;
+  background: #343a40 !important;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 5px !important;
+}
+
+.c3-legend-background {
+  fill: transparent;
+  stroke: transparent;
+}
+
+.map-area {
+    height: 36rem;
+}
+
+.chart-area {
+    height: 150px;
+}
+.c3 {
+  max-height: 150px;
+}
+.c3 svg {
+  height: 150px;
+}
+
+.name {
+  background-color: black;
+  color: black
+}
+
+.value {
+  background-color: black;
+  color: black
+}
+
+.text-xs {
+  font-size: .9rem;
+}
+.h3{
+  font-size: 2rem;
+  font-family: 'stratum';
+}
+.h5 {
+  font-size: 1.5rem;
+  font-family: 'kievit';
+}
+
+h6 {
+  font-size: 1.2rem;
+  font-family: 'kievit';
+}
+
+.navbar-nav{
+  font-size: 1.5rem;
+  font-family: 'kievit';
+}
+
+.legend {
+line-height: 16px;
+width: 140px;
+color: #333333;
+font-family: 'Open Sans', sans-serif;
+padding: 6px 8px;
+background: white;
+background: rgba(255,255,255,0.5);
+box-shadow: 0 0 15px rgba(0,0,0,0.2);
+border-radius: 5px;
+  font-family: 'kievit';
+}
+
+.legend i {
+width: 16px;
+height: 16px;
+float: left;
+margin-right: 8px;
+opacity: 0.9;
+}
+
+.legend img {
+width: 16px;
+height: 16px;
+margin-right: 3px;
+float: left;
+}
+
+.legend p {
+font-size: 12px;
+line-height: 16px;
+margin: 0;
+}
