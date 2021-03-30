@@ -139,3 +139,7 @@ font-size: 12px;
 line-height: 16px;
 margin: 0;
 }
+
+#hint{
+  cursor: pointer;
+}

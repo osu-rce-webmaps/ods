@@ -1,34 +1,39 @@
- <!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
+
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
   <meta name="description" content="">
-  <meta name="authors" content="Benji Antolin">
+  <meta name="author" content="">
+
   <title>ODS Explorer</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
   <link rel="stylesheet" href="css/MarkerCluster.css">
   <link rel="stylesheet" href="css/MarkerCluster.Default.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-  <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
-  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
   <link href="css/c3.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/simplebar.css" />
   <link rel="stylesheet" href="css/leaflet.zoomhome.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
-  <link rel="stylesheet" href="css/main.css">
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="css/main0.css">
+
+
   <script src="js/d3.js"></script>
   <script src="js/c3.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
   <script src="js/chroma.min.js"></script>
   <script src="js/jquery-3.3.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="js/simplebar.min.js"></script>
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
   <script src="https://rawgit.com/mapbox/mapbox-gl-leaflet/master/leaflet-mapbox-gl.js"></script>
   <script src="https://unpkg.com/rbush@2.0.1/rbush.min.js"></script>
@@ -37,246 +42,473 @@
   <script src="js/leaflet.markercluster.js"></script>
   <script src="js/leaflet.zoomhome.min.js"></script>
   <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-  <script src="js/leaflet-pip.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+
+
 </head>
 
-<body>
-  <main>
-    <div class="loader"></div>
-    <div id="textboxes">
-      <div id="deck-1" class="card-deck counts">
+<body id="page-top">
 
+  <!-- Page Wrapper -->
+  <div id="wrapper">
 
-        <div class="card">
-          <center>
-            <div class="card-title">
-              Select School Year:
-              <i class="fas fa-question-circle tooltip">
-                <span class="tooltiptext">
-                  Select school year to update map
-                  <span>
-              </i>
+    <!-- Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <!-- <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button> -->
+
+          <h1 class="h3 mb-0 text-gray-800">Outdoor School Explorer</h1>
+          <div class="topbar-divider d-none d-sm-block"></div>
+          <!-- <div class="dropdown card">
+            <button class="btn btn-secondary btn-sm dropdown-toggle" id="yearDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              2018-19
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" id="y201819" value="1">2018-19</a>
+              <a class="dropdown-item" id="y201718" value="2">2017-18</a>
             </div>
-            <div class="dropdown card">
-              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                2018-19
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" id="y201819" value="1">2018-19</a>
-                <a class="dropdown-item" id="y201718" value="2">2017-18</a>
+          </div> -->
+          <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Export Data</a> -->
+
+          <!-- Topbar Search -->
+          <!-- <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
               </div>
             </div>
-          </center>
-        </div>
+          </form> -->
 
-        <div class="card">
-          <center>
-            <div class="card-title">
-              # of Students Participating
-              <i class="fas fa-question-circle tooltip">
-                <span class="tooltiptext">
-                  # of Students - Participating: The number of students
-                  participating in outdoor school is count of the students
-                  who participated in outdoor school (either at the time of
-                  application (an estimate) or at the time of reporting
-                  (the actual number who attended) in a given year or across
-                  years in a given geography.
-                  <span>
-              </i>
-            </div>
-            <p class="card-text"><span class="stu-count"></span>
-          </center>
-        </div>
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav">
 
-        <div class="card">
-          <center>
-            <div class="card-title">
-              Funding per Student
-              <i class="fas fa-question-circle tooltip">
-                <span class="tooltiptext">
-                  Funding per Student - Our unit of cost for outdoor school is
-                  “dollars per student”, so when looking at an amount funded
-                  for outdoor school - either an overall average, a threshold
-                  amount, or a per specific program average - we express those
-                  amounts in dollars per student as well.
-                  <span>
-              </i>
-            </div>
-            <p class="card-text"><span class="fps-count"></span>
-          </center>
-        </div>
+            <!-- Nav Item - Data Selection -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Select Topic:</span>
+                <span id="dataDropdown">Fiscals</span>
+              </a>
+              <!-- Dropdown - Data Selection -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <center>
+                  <a class="dropdown-item" id="Fiscals" value="1">Fiscals</a>
+                  <a class="dropdown-item disabled" id="Performance" value="2">Performance</a>
+                </center>
+              </div>
+            </li>
 
-        <div class="card">
-          <center>
-            <div class="card-title">
-              $ Awarded
-              <i class="fas fa-question-circle tooltip">
-                <span class="tooltiptext">
-                  $ Awarded - this is the annual total of dollars awarded/reimbursed
-                  to qualifying agencies (school districts, ESDs, and/or state-sponsored
-                  charters) within the given geography.
-                  <span>
-              </i>
-            </div>
-            <p class="card-text"><span class="awarded-count"></span>
-          </center>
-        </div>
+            <div class="topbar-divider d-none d-sm-block"></div>
 
-        <div class="card">
-          <center>
-            <div class="card-title">
-              Avg. Length of Program
-              <i class="fas fa-question-circle tooltip">
-                <span class="tooltiptext">
-                  Avg. Length of Program - The average length of program is a calculation
-                  of the average length (in days) of the outdoor school programs attended
-                  by 5th and/or 6th grade students in a given year (or across years)
-                  <span>
-              </i>
-            </div>
-            <p class="card-text"><span class="avgDays-count"></span>
-          </center>
-        </div>
+            <!-- Nav Item - Geography Selection -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Select Geography:</span>
+                <span id="geoDropdown">House Districts</span>
+              </a>
+              <!-- Dropdown - Geography Selection -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <center>
+                  <a class="dropdown-item" id="house" value="1">House Districts</a>
+                  <a class="dropdown-item" id="senate" value="2">Senate Districts</a>
+                </center>
+              </div>
+            </li>
+            <div class="topbar-divider d-none d-sm-block"></div>
+            <!-- Nav Item - Year Selection -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Select Year:</span>
+                <span id="yearDropdown">2018-19</span>
+              </a>
+              <!-- Dropdown - Year Selection -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <center>
+                  <a class="dropdown-item" id="y201819" value="1">2018-19</a>
+                  <a class="dropdown-item" id="y201718" value="2">2017-18</a>
+                </center>
+              </div>
+            </li>
 
-      </div>
-    </div>
-    <div id="info" data-simplebar data-simplebar-auto-hide="true">
-      <div id="infobuttons">
-        <!-- <span><a href="https://facebook.com/sharer.php?u=https://benjiantolin.github.io/law/" target="_blank"><i class="fab fa-facebook-square"></i></a></span>
-        <span><a href="https://github.com/benjiantolin/law" target="_blank"><i class="fab fa-github-square"></i></a></span> -->
-        <!-- <span><a data-toggle="modal" data-target="#infowindow"><i class="nav fas fa-info-circle"></i></a></span> -->
-        <span><a href="https://osu-rce-webmaps.github.io/ods/senate.html"><button type="button" class="btn btn-secondary">View Senate Districts</button></a></span>
-      </div>
-      <div id="title" style="font-size:1.5vw">Outdoor School Explorer - House Districts</div>
+          </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
 
 
-      <p><span id="placename">Oregon State</span></p>
-      <span id="hint"> Click on map to review district statistics.</span>
+          <!-- Content Row -->
 
-
-      <div id="stuDeck" class="card-deck">
-        <div class="card charts">
-          <center>
-            <div class="card-title">
-              # of Students per Year
-              <i class="fas fa-question-circle tooltip">
-                <span class="tooltiptext">
-                  # of Students - receiving Outdoor School funding per year -
-                  per the geography selected (county, school district, ESD, or
-                  legislative district)
-                  <span>
-              </i>
-            </div>
-          </center>
-          <div id="stuChart"></div>
-        </div>
-      </div>
-
-      <hr>
-
-      <div id="awardDeck" class="card-deck">
-        <div class="card charts">
-          <center>
-            <div class="card-title">
-              $ Awarded per year
-              <i class="fas fa-question-circle tooltip">
-                <span class="tooltiptext">
-                  $ Awarded per year - the actual cost reimbursed for the outdoor
-                  school experiences of the students in that geography. Because of
-                  the pandemic, this amount includes (will include) non-refundable
-                  deposits and other district incurred costs for outdoor school
-                  programs and facilities that had to be cancelled because of state
-                  mandated COVID-19 restrictions in 2019-2020 and 2020-2021.
-                </span>
-              </i>
-            </div>
-          </center>
-              <div id="awardChart"></div>
-        </div>
-      </div>
-
-      <hr>
-
-      <div id="plDeck" class="card-deck ">
-        <div class="card charts">
-          <center>
-            <div class="card-title">
-              Program lengths (days & nights)
-              <i class="fas fa-question-circle tooltip">
-                <span class="tooltiptext">
-                  Program lengths (days & nights) - Comparison of program lengths used -
-                  For data visualization purposes, we track (count) the frequency of
-                  attendance for each of the most typical outdoor school programs
-                  (such as 3-day 0-night, 3-day 2-night, 4-day 3-night, 5-day 4-night, etc.)
-                  in a given year.
-                  <span>
-              </i>
-            </div>
-          </center>
-              <div id="chart"></div>
-        </div>
-      </div>
-    <hr>
-    </div>
-
-
-    </div>
-
-    <div id="map"></div>
-
-    <div id="legend-panel">
-      <div class="card-deck legend">
-        <div id="legend-title">
-          <div class="card">
-            <div class="card-body legend-color-1">
-              <h5 class="card-title" style="color:black">% of Students Participating</h5>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-body legend-color-1">
-            <h5 class="card-title" style="color:black">
-              < 50%</h5> </div> </div> <div class="card">
-                <div class="card-body  legend-color-2">
-                  <h5 class="card-title" style="color:black">50-74%</h5>
+          <div class="row">
+            <div class="col-lg-3 mb-2">
+              <div class="card text-white shadow">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary"><span id="placename">Oregon State</span> by-the-numbers for <span id="yearTitle">2018-19</span></h6>
                 </div>
-          </div>
-          <div class="card">
-            <div class="card-body  legend-color-3">
-              <h5 class="card-title" style="color:black">75-100%</h5>
+                <div class="row">
+                  <!-- Earnings (Monthly) Card Example -->
+                  <div class="col-xl-6 col-md-6 mb-1">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                      <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                          <div class="col mr-2">
+                            <center>
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Funding per Student</div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="fps-count"></span></div>
+                            </center>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Pending Requests Card Example -->
+                  <div class="col-xl-6 col-md-6 mb-1">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                      <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                          <div class="col mr-2">
+                            <center>
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Avg. Number of Days</div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="avgDays-count"></span></div>
+                            </center>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <!-- Color System -->
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="card shadow">
+                      <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Annual Count of Student Attending</h6>
+                      </div>
+                      <div class="card-body">
+                        <div class="chart-area">
+                          <div id="stuChart" class="chart-height"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="card shadow">
+                      <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Annual Dollars($) Awarded</h6>
+                      </div>
+                      <div class="card-body">
+                        <div class="chart-area">
+                          <div id="awardChart" class="chart-height"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="card shadow">
+                      <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Program Length (Days & Nights)</h6>
+                      </div>
+                      <div class="card-body">
+                        <div class="chart-area">
+                          <div id="chart" class="chart-height"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+
+
+            <!-- Content Column -->
+
+            <div class="col-lg-7 mb-2">
+              <div class="card text-white shadow">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Totals Since Start of Program (July 2017)</h6>
+                </div>
+                <div class="row">
+                  <!-- Totals - Students Funded Card Example -->
+                  <div class="col-xl-6 col-md-6 mb-1">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                      <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                          <div class="col mr-2">
+                            <center>
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Students Funded</div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="totStu-count"></span></div>
+                            </center>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Pending Requests Card Example -->
+                  <div class="col-xl-6 col-md-6 mb-1">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                      <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                          <div class="col mr-2">
+                            <center>
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Amount Funded</div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="totFund-count"></span></div>
+                            </center>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Map -->
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary"><i><span id="hint">Click on map to review district data</span></i></h6>
+                  </div>
+                  <div class="card-body">
+                    <div class="map-area">
+                      <div id="map">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-lg-2 mb-2">
+              <div class="card text-white shadow">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Statewide by-the-numbers</h6>
+                </div>
+                <div class="row">
+                  <!-- # of Students Card Example -->
+                  <div class="col-xl-12 col-md-12 mb-1">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                      <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                          <div class="col mr-2">
+                            <center>
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Number of Students</div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="stuState-count"></span></div>
+                            </center>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <!-- # of Schools Card Example -->
+                  <div class="col-xl-12 col-md-12 mb-1">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                      <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                          <div class="col mr-2">
+                            <center>
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Number of Schools</div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="school-count"></span></div>
+                            </center>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <!-- $ Awarded Card Example -->
+                  <div class="col-xl-12 col-md-12 mb-1">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                      <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                          <div class="col mr-2">
+                            <center>
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Dollars ($) Awarded</div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="awardedState-count"></span></div>
+                            </center>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <!-- # of Districts Card Example -->
+                  <div class="col-xl-12 col-md-12 mb-1">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                      <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                          <div class="col mr-2">
+                            <center>
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Number of Districts</div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="sd-count"></span></div>
+                            </center>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+
+                  <!-- Funding per student Card Example -->
+                  <div class="col-xl-12 col-md-12 mb-1">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                      <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                          <div class="col mr-2">
+                            <center>
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Funding per Student</div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="fpsState-count"></span></div>
+                            </center>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <!-- Average # of Days Card Example -->
+                  <div class="col-xl-12 col-md-12 mb-1">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                      <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                          <div class="col mr-2">
+                            <center>
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Avg. Number of Days</div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="avgDaysState-count"></span></div>
+                            </center>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <!-- Earnings (Monthly) Card Example -->
+                  <div class="col-xl-12 col-md-12 mb-1">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                      <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                          <div class="col mr-2">
+                            <center>
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Number of Days Outside</div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="days-count"></span></div>
+                            </center>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- Content Row -->
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <!-- <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Your Website 2020</span>
           </div>
         </div>
-      </div>
+      </footer> -->
+      <!-- End of Footer -->
 
-  </main>
-  <div id="infowindow" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document" style="width:1250px!important">
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <strong class="modal-title" id="exampleModalLongTitle">Data Source & Attributions</strong>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+          <h5 class="modal-title" id="exampleModalLabel">Number of Students Participating</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
           </button>
         </div>
         <div class="modal-body">
-          <div id="demo" class="carousel " data-ride="carousel">
-            <p>This web application is intended only as a guide and is based on US Census data.</p>
-            <p>Chart Data Source: U.S. Census Bureau, 2013-2017 American Community Survey 5-Year Estimates, <a href="https://data.census.gov/cedsci/table?q=c16001&g=0400000US41,41.050000&tid=ACSDT5Y2017.C16001&hidePreview=false"
-                target="_blank">Table: C16001</a></p>
-            <p>Choropleth Data Source: U.S. Census Bureau, 2013-2017 American Community Survey 5-Year Estimates, <a href="https://data.census.gov/cedsci/table?q=b16003&g=0400000US41,41.050000&tid=ACSDT5Y2017.B16003&hidePreview=false"
-                target="_blank">Table: B16003</a></p>
-            <div>
-              * If you have any questions or concerns, please contact <a href="mailto:benjiantolin@gmail.com">Benji Antolin</a>.
-            </div>
-          </div>
+          The number of students
+          participating in outdoor school is count of the students
+          who participated in outdoor school (either at the time of
+          application (an estimate) or at the time of reporting
+          (the actual number who attended) in a given year or across
+          years in a given geography.
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
 
-  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+
+
   <script>
     $(window).ready(function() {
       $('.loader').fadeOut("slow");
@@ -310,19 +542,21 @@
       localStorage.setItem('popState', 'notShown');
     })
 
+
+
     // County Labels
-    var hideLabel = function(label) {
-      label.labelObject.style.opacity = 0;
-    };
-    var showLabel = function(label) {
-      label.labelObject.style.opacity = 1;
-    };
-    var labelEngine = new labelgun.default(hideLabel, showLabel);
-    var labels = [];
+    // var hideLabel = function(label) {
+    //   label.labelObject.style.opacity = 0;
+    // };
+    // var showLabel = function(label) {
+    //   label.labelObject.style.opacity = 1;
+    // };
+    // var labelEngine = new labelgun.default(hideLabel, showLabel);
+    // var labels = [];
 
     var oregonBounds = L.latLngBounds(
       L.latLng(42, -124.8), //Southwest
-      L.latLng(46, -116.18) //Northeast
+      L.latLng(46.25, -116.18) //Northeast
     );
 
 
@@ -330,35 +564,66 @@
     var mymap = L.map('map', {
       // center: [44.25, -119.5],
       zoomControl: false,
-      zoom: 7,
+      // zoom: 7,
       maxZoom: 15,
-      minZoom: 3,
+      minZoom: 4,
+      maxBounds: oregonBounds,
+      maxBoundsViscosity: .6,
     }).fitBounds(oregonBounds);
+
+    var geocoder = L.Control.geocoder({
+        defaultMarkGeocode: true,
+        collapsed: false,
+        showUniqueResult: true,
+        placeholder: "Search a location...",
+        errorMessage: "Nothing was Found...",
+        position: 'topright'
+      })
+      .on('markgeocode', function(e) {
+        lat = e.geocode.center.lat;
+        lng = e.geocode.center.lng;
+        if (!marker) {
+          marker = L.marker([lat, lng]).addTo(mymap);
+        } else {
+          marker.setLatLng([lat, lng]);
+        }
+
+        $("#map").click(marker);
+      })
+      .addTo(mymap);
 
     new L.Control.zoomHome({
       position: 'topright'
     }).addTo(mymap);
 
 
-    var gray = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png');
+    // 12. Add a scale bar
     var voyager =
       L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}@2x.png').addTo(mymap);
     var satellite =
       L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
+    var natgeo = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
+      maxZoom: 16
+    });
 
 
     var baseLayers = {
-      'CartoDB Light': gray,
       'CartoDB Voyager': voyager,
-      'ESRI Satellite': satellite
+      'ESRI Satellite': satellite,
+      'ESRI National Geographic': natgeo,
     }
 
 
     // Global Vars
     var chart, marker;
     var schoolYear = 2;
+    var geoLayer = 1;
     // var perPar = 'style201819';
-
+    var daysAttended1718 = 0;
+    var daysAttended1819 = 0;
+    var totalStudents = 0;
+    var totalFunded = 0;
     // 6. Set function for color ramp
     var colors = chroma.scale('PuBuGn').colors(4);
 
@@ -367,8 +632,30 @@
       $('head').append($("<style> .legend-color-" + (i + 1).toString() + " { background: " + colors[i] + "; font-size: 15px; text-shadow: 0 0 3px #ffffff;} </style>"));
     }
 
+    var legend = L.control({
+      position: 'bottomright'
+    });
+
+    // 10. Function that runs when legend is added to map
+    legend.onAdd = function() {
+
+      // Create Div Element and Populate it with HTML
+      var div = L.DomUtil.create('div', 'legend');
+      div.innerHTML += '<b>% of Students Participating<b><br>';
+      div.innerHTML += '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p>75-100%</p>';
+      div.innerHTML += '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p>50-74%</p>';
+      div.innerHTML += '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p> <50%</p>';
+      div.innerHTML += '<hr><b>Schools<b><br>';
+      div.innerHTML += '<i class="marker-cluster marker-cluster-small"></i><p> # of Schools</p>';
+      // Return the Legend div containing the HTML content
+      return div;
+    };
+
+    // 11. Add a legend to map
+    legend.addTo(mymap);
+
     // Create object that can add school icon to the map through leaflet
-    var schools = new L.MarkerClusterGroup({
+    var schools1819 = new L.MarkerClusterGroup({
       spiderfyOnMaxZoom: true,
       singleMarkerMode: true,
       maxClusterRadius: 50,
@@ -401,7 +688,7 @@
       // }
     }).addTo(mymap);
 
-    var schools2 = new L.MarkerClusterGroup({
+    var schools1718 = new L.MarkerClusterGroup({
       spiderfyOnMaxZoom: true,
       singleMarkerMode: true,
       maxClusterRadius: 50,
@@ -442,6 +729,9 @@
       d3.csv('assets/houseProgLength.csv'), //datasets[2]
       d3.csv('assets/schools201819.csv'), //dataset [3]
       d3.csv('assets/schools201718.csv'), //dataset [4]
+      d3.csv('assets/senateTimeseries.csv'), //datasets[5]
+      d3.json("assets/senateNewMin.geojson"), //datasets[6]
+      d3.csv('assets/senateProgramLength.csv'), //datasets[7]
     ]).then(function(datasets) {
 
       $.fn.digits = function() {
@@ -449,8 +739,6 @@
           $(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
         })
       }
-
-
 
       var schoolLayer201819 = datasets[3].forEach(function(d) {
         L.marker([d.Y, d.X], {}).bindPopup(
@@ -462,8 +750,14 @@
           "<b>ODS Region: </b>" + d.ods_region + "<br>" +
           "<b>ODS Contact: </b>" + d.ods_coordinator + "<br>" +
           "<b>ODS Contact Info: </b>" + d.ods_contact + "<br>"
-        ).addTo(schools);
+        ).addTo(schools1819);
+        var stuPar = 0;
+        var numDays = 0;
+        stuPar = d.Number_Attending;
+        numDays = d.Days;
+        daysAttended1819 += (stuPar * numDays)
       })
+
 
       var schoolLayer201718 = datasets[4].forEach(function(d) {
         L.marker([d.Y, d.X], {}).bindPopup(
@@ -475,7 +769,12 @@
           "<b>ODS Region: </b>" + d.ods_region + "<br>" +
           "<b>ODS Contact: </b>" + d.ods_coordinator + "<br>" +
           "<b>ODS Contact Info: </b>" + d.ods_contact + "<br>"
-        ).addTo(schools2);
+        ).addTo(schools1718);
+        var stuPar = 0;
+        var numDays = 0;
+        stuPar = d.Number_Attending;
+        numDays = d.Days;
+        daysAttended1718 += (stuPar * numDays)
       })
 
 
@@ -674,15 +973,25 @@
         });
 
 
+        totalStudents = oregon.stu[1] + oregon.stu[2];
+        totalFunded = oregon.treq[1] + oregon.treq[2];
 
-        $(".stu-count").text(oregon.stu[schoolYear]).digits();
-        $(".fps-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2)).digits();
-        $(".awarded-count").text("$" + (oregon.treq[schoolYear]).toFixed(2)).digits();
+        $(".totStu-count").text(totalStudents).digits();
+        $(".totFund-count").text("$" + totalFunded).digits();
+
+        $(".fps-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2));
         $(".avgDays-count").text((oregon.ad[schoolYear]).toFixed(2) + " Days");
-        $("#deck-1 > div:nth-child(1) > p > span.cases-count").digits();
 
 
-        //
+        $(".stuState-count").text(oregon.stu[schoolYear]).digits();
+        $(".school-count").text(oregon.s[schoolYear]).digits();
+        $(".sd-count").text("199").digits();
+        $(".days-count").text(daysAttended1819).digits();
+        $(".fpsState-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2)).digits();
+        $(".awardedState-count").text("$" + (oregon.treq[schoolYear]).toFixed(2)).digits();
+        $(".avgDaysState-count").text((oregon.ad[schoolYear]).toFixed(2) + " Days");
+
+
         // $(".stu-count").text(oregon.stu[2]).digits();
         // $(".fps-count").text("$" + (oregon.reqs[2]).toFixed(2)).digits();
         // $(".awarded-count").text("$" + (oregon.treq[2]).toFixed(2)).digits();
@@ -712,7 +1021,21 @@
           tthree2 = 0, tthree3 = 0, tfour0 = 0, tfour2 = 0, tfour3 = 0,
           tfour5 = 0, tfive0 = 0, tfive4 = 0, tsix0 = 0, tsix5 = 0,
           tpl18 = 0, tpl19 = 0;
-        datasets[0].forEach(function(d) {
+
+
+        switch (geoLayer) {
+          case 1:
+            geoset = datasets[0];
+            progSet = datasets[2];
+            break;
+          case 2:
+            geoset = datasets[5];
+            progSet = datasets[7];
+            break;
+          default:
+        }
+
+        geoset.forEach(function(d) {
           t.push(d["Year"]);
           ts = 0, tstu = 0, tad = 0, ttreq = 0, treqs = 0,
             tods5 = 0, tode5 = 0, tods6 = 0, tode6 = 0, tone0 = 0,
@@ -873,7 +1196,7 @@
         });
 
 
-        datasets[2].forEach(function(d) {
+        progSet.forEach(function(d) {
           l.push(d["Length"]);
           tpl18 = 0, tpl19 = 0;
           current = d;
@@ -916,6 +1239,7 @@
 
 
 
+
         if (i["name"] == "Oregon") {
           $("#placename").text(i["name"] + " State");
 
@@ -944,7 +1268,7 @@
 
 
 
-      function style2(feature) {
+      function styleHouse1819(feature) {
         return {
           fillColor: setColor(feature.properties.per_per2_1),
           fillOpacity: 0.4,
@@ -955,7 +1279,7 @@
         };
       }
 
-      function style1(feature) {
+      function styleHouse1718(feature) {
         return {
           fillColor: setColor(feature.properties.per_per201),
           fillOpacity: 0.4,
@@ -966,6 +1290,27 @@
         };
       }
 
+      function styleSenate1819(feature) {
+        return {
+          fillColor: setColor(feature.properties.p1819),
+          fillOpacity: 0.4,
+          weight: 2,
+          opacity: 1,
+          color: '#b4b4b4',
+          dashArray: '4'
+        };
+      }
+
+      function styleSenate1718(feature) {
+        return {
+          fillColor: setColor(feature.properties.p1718),
+          fillOpacity: 0.4,
+          weight: 2,
+          opacity: 1,
+          color: '#b4b4b4',
+          dashArray: '4'
+        };
+      }
 
       function highlightFeature(e) {
         // e indicates the current event
@@ -1019,7 +1364,7 @@
         var pL2019 = ["2018-19"]
 
         var place = {
-          name: e.target.feature.properties.house_geo,
+          name: e.target.feature.properties.geo,
           s: schoolsPar,
           stu: stuPar,
           ad: avgDays,
@@ -1052,10 +1397,11 @@
         countyCounts(place);
 
 
-        $(".stu-count").text(place.stu[schoolYear]);
+        // $(".stu-count").text(place.stu[schoolYear]);
+        $(".awarded-count").text("$" + (place.treq[schoolYear]).toFixed(2)).digits();
+
         // $(".fps-count").text((e.target.feature.properties.reqStu2018)).toFixed(2);
-        $(".fps-count").text("$ " + (place.reqs[schoolYear]).toFixed(2));
-        $(".awarded-count").text("$ " + (place.treq[schoolYear]).toFixed(2)).digits();
+        $(".fps-count").text("$" + (place.reqs[schoolYear]).toFixed(2));
         $(".avgDays-count").text((place.ad[schoolYear]).toFixed(2) + " Days");
         $("#placename").text(e.target.feature.properties.NAMELSAD);
 
@@ -1081,8 +1427,31 @@
 
       // 3.2.3 reset the hightlighted feature when the mouse is out of its region.
       function resetHighlight(e) {
-        county2.resetStyle(e.target);
-
+        switch (geoLayer) {
+          case 1:
+            switch (schoolYear) {
+              case 1:
+                house1718.resetStyle(e.target);
+                break;
+              case 2:
+                house1819.resetStyle(e.target);
+                break;
+              default:
+            }
+            break;
+          case 2:
+            switch (schoolYear) {
+              case 1:
+                senate1718.resetStyle(e.target);
+                break;
+              case 2:
+                senate1819.resetStyle(e.target);
+                break;
+              default:
+            }
+            break;
+          default:
+        }
       }
 
       // 3.3 add these event the layer obejct.
@@ -1092,89 +1461,51 @@
           click: zoomToFeature,
           mouseout: resetHighlight
         });
-        // add labels
         layer.bindTooltip(feature.properties.NAMELSAD, {
           className: 'feature-label',
-          permanent: true,
+          permanent: false,
           direction: 'center'
         });
-        labels.push(layer);
+
       }
 
-      // Build labels
-      function addLabel(layer, id) {
 
-        // This is ugly but there is no getContainer method on the tooltip :(
-        var label = layer.getTooltip()._source._tooltip._container;
-        if (label) {
-          // We need the bounding rectangle of the label itself
-          var rect = label.getBoundingClientRect();
-
-          // We convert the container coordinates (screen space) to Lat/lng
-          var bottomLeft = mymap.containerPointToLatLng([rect.left, rect.bottom]);
-          var topRight = mymap.containerPointToLatLng([rect.right, rect.top]);
-          var boundingBox = {
-            bottomLeft: [bottomLeft.lng, bottomLeft.lat],
-            topRight: [topRight.lng, topRight.lat]
-          };
-
-          // Ingest the label into labelgun itself
-          labelEngine.ingestLabel(
-            boundingBox,
-            id,
-            parseInt(Math.random() * (5 - 1) + 1), // Weight
-            label,
-            label.innerText,
-            false
-          );
-
-          // If the label hasn't been added to the map already
-          // add it and set the added flag to true
-          if (!layer.added) {
-            layer.addTo(mymap);
-            layer.added = true;
-          }
-        }
-      }
-
-      mymap.on("zoomend", function() {
-        var i = 0;
-        county2.eachLayer(function(label) {
-          addLabel(label, ++i);
-        });
-        labelEngine.update();
-      });
-
-
-      var county2 = new L.GeoJSON(datasets[1], {
-        style: style2,
+      var house1819 = new L.GeoJSON(datasets[1], {
+        style: styleHouse1819,
         onEachFeature: onEachFeature
       }).addTo(mymap);
 
-      oregonBounds = county2.getBounds();
-      var county1 = new L.GeoJSON(datasets[1], {
-        style: style1,
+      var house1718 = new L.GeoJSON(datasets[1], {
+        style: styleHouse1718,
         onEachFeature: onEachFeature
       });
-      // mymap.fitBounds(county.getBounds());
+
+      var senate1819 = new L.GeoJSON(datasets[6], {
+        style: styleSenate1819,
+        onEachFeature: onEachFeature
+      });
+
+      var senate1718 = new L.GeoJSON(datasets[6], {
+        style: styleSenate1718,
+        onEachFeature: onEachFeature
+      });
+
+
 
       new L.control.layers(baseLayers, {
         // "Infection Level": areas,
         // "Infection Case(s) &nbsp;&nbsp; <i class='fas fa-users community'></i>": cases,
         // "Infected Community &nbsp;&nbsp; <i class='fas fa-procedures community'></i>": communities
       }, {
-        collapsed: false
+        collapsed: true
       }).addTo(mymap);
 
 
 
       $("#hint").on("click", function() {
         // stateCounts(oregon);
-        $(".stu-count").text(oregon.stu[schoolYear]).digits();
         $(".fps-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2)).digits();
-        $(".awarded-count").text("$" + (oregon.treq[schoolYear]).toFixed(2)).digits();
         $(".avgDays-count").text((oregon.ad[schoolYear]).toFixed(2) + " Days");
-        $("#deck-1 > div:nth-child(1) > p > span.cases-count").digits();
 
 
         $("#placename").text("Oregon State");
@@ -1202,16 +1533,19 @@
 
       function onMapClick(e) {
         $("#hint").click();
+
       }
 
       mymap.on('click', onMapClick);
 
       stateCounts(oregon);
 
-
+      // windowHeight = $(window).height()
+      //
+      // chartHeight = windowHeight/6
       stuChart = c3.generate({
         size: {
-          height: 180,
+          // height: chartHeight,
           // width: 100,
         },
         data: {
@@ -1230,6 +1564,14 @@
             type: "category",
             categories: ["2017-18", "2018-19"],
           },
+          y: {
+            tick: {
+              format: d3.format(","),
+
+              count: 5,
+              // values: [0,5000,10000,15000]
+            }
+          }
         },
         tooltip: {
           format: {
@@ -1246,7 +1588,7 @@
 
       awardChart = c3.generate({
         size: {
-          height: 180,
+          // height: chartHeight,
           // width: 480
         },
         data: {
@@ -1260,8 +1602,6 @@
           width: {
             ratio: 0.25 // this makes bar width 50% of length between ticks
           }
-          // or
-          //width: 100 // this makes bar width 100px
         },
         axis: {
           x: {
@@ -1270,8 +1610,9 @@
           },
           y: {
             tick: {
-              format: d3.format("$,")
-              //                format: function (d) { return "$" + d; }
+              format: d3.format("$,"),
+              count: 5,
+              // values: [0,5000,10000,15000]
             }
           }
         },
@@ -1288,9 +1629,11 @@
         bindto: "#awardChart"
       });
 
+
+
       chart = c3.generate({
         size: {
-          height: 220,
+          // height: chartHeight,
           // width: 480
         },
         data: {
@@ -1306,7 +1649,7 @@
         legend: {
           position: 'inset',
           inset: {
-            anchor: "top-left",
+            anchor: "top-right",
             y: 0,
             step: 0
           },
@@ -1314,14 +1657,23 @@
         axis: {
           x: {
             type: "category",
-            categories: ["3 Days    0 Nights", "4 Days    0 Nights", "3 Days    2 Nights",
-              "4 Days    3 Nights", "5 Days    4 Nights", "6 Days    5 Nights",
+            tick: {
+              multiline: true
+            },
+            categories: ["3 Days 0 Nights", "4 Days 0 Nights", "3 Days 2 Nights",
+              "4 Days 3 Nights", "5 Days 4 Nights", "6 Days 5 Nights",
             ],
           },
           y: {
             label: {
               text: 'Number of Students',
               position: 'outer-middle'
+            },
+            tick: {
+              format: d3.format(','),
+              count: 5,
+              // count: 10,
+              // values: [0,5000,10000,15000]
             },
             min: 0,
             padding: {
@@ -1342,99 +1694,148 @@
         },
         bindto: "#chart"
       });
-      // Add Geocoder
-      var geocoder = L.Control.geocoder({
-          defaultMarkGeocode: true,
-          collapsed: false,
-          showUniqueResult: true,
-          placeholder: "Search a location...",
-          errorMessage: "Nothing was Found...",
-          position: 'topright'
-        })
-        .on('markgeocode', function(e) {
-          lat = e.geocode.center.lat;
-          lng = e.geocode.center.lng;
-          if (!marker) {
-            marker = L.marker([lat, lng]).addTo(mymap);
-          } else {
-            marker.setLatLng([lat, lng]);
-          }
 
-          $("#map").click(marker);
 
-        })
-        .addTo(mymap);
 
       /* When the user clicks on the button,
       toggle between hiding and showing the dropdown content */
       $("#y201819").on("click", function() {
-        $(".dropdown-toggle").text("2018-19");
-        mymap.removeLayer(schools2);
-        mymap.addLayer(schools);
-        mymap.removeLayer(county1);
-        mymap.addLayer(county2);
-        $(".stu-count").text(oregon.stu[2]).digits();
-        $(".fps-count").text("$" + (oregon.reqs[2]).toFixed(2)).digits();
-        $(".awarded-count").text("$" + (oregon.treq[2]).toFixed(2)).digits();
-        $(".avgDays-count").text((oregon.ad[2]).toFixed(2) + " Days");
-        $("#deck-1 > div:nth-child(1) > p > span.cases-count").digits();
-        $("#placename").text("Oregon State");
         schoolYear = 2;
-        mymap.on("zoomend", function() {
-          var i = 0;
-          county2.eachLayer(function(label) {
-            addLabel(label, ++i);
-          });
-          labelEngine.update();
-        });
+        $("#yearDropdown").text("2018-19");
+        $("#yearTitle").text("2018-19");
+        mymap.removeLayer(house1718);
+        mymap.removeLayer(house1819);
+        mymap.removeLayer(senate1718);
+        mymap.removeLayer(senate1819);
+        mymap.removeLayer(schools1718);
+        mymap.addLayer(schools1819);
+
+        switch (geoLayer) {
+          case 1:
+            mymap.addLayer(house1819);
+            break;
+          case 2:
+            mymap.addLayer(senate1819);
+            break;
+          default:
+        }
+        $(".fps-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2));
+        $(".avgDays-count").text((oregon.ad[schoolYear]).toFixed(2) + " Days");
+        $(".stuState-count").text(oregon.stu[schoolYear]).digits();
+        $(".school-count").text(oregon.s[schoolYear]).digits();
+        $(".sd-count").text("199").digits();
+        $(".days-count").text(daysAttended1819).digits();
+        $(".fpsState-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2)).digits();
+        $(".awardedState-count").text("$" + (oregon.treq[schoolYear]).toFixed(2)).digits();
+        $(".avgDaysState-count").text((oregon.ad[schoolYear]).toFixed(2) + " Days");
+        $("#placename").text("Oregon State");
       });
 
       $("#y201718").on("click", function() {
-        $(".dropdown-toggle").text("2017-18");
-        mymap.removeLayer(schools);
-        mymap.addLayer(schools2);
-        mymap.removeLayer(county2);
-        mymap.addLayer(county1);
-        $(".stu-count").text(oregon.stu[1]).digits();
-        $(".fps-count").text("$" + (oregon.reqs[1]).toFixed(2)).digits();
-        $(".awarded-count").text("$" + (oregon.treq[1]).toFixed(2)).digits();
-        $(".avgDays-count").text((oregon.ad[1]).toFixed(2) + " Days");
-        $("#deck-1 > div:nth-child(1) > p > span.cases-count").digits();
-        $("#placename").text("Oregon State");
         schoolYear = 1;
-        mymap.on("zoomend", function() {
-          var i = 0;
-          county1.eachLayer(function(label) {
-            addLabel(label, ++i);
-          });
-          labelEngine.update();
-        });
-        mymap.setZoom(7);
+        $("#yearDropdown").text("2017-18");
+        $("#yearTitle").text("2017-18");
+        // Remove Map Layers
+        mymap.removeLayer(house1718);
+        mymap.removeLayer(house1819);
+        mymap.removeLayer(senate1718);
+        mymap.removeLayer(senate1819);
+        mymap.removeLayer(schools1819);
+
+        // Add selected geo layer for selected year
+        mymap.addLayer(schools1718);
+        switch (geoLayer) {
+          case 1:
+            mymap.addLayer(house1718);
+            break;
+          case 2:
+            mymap.addLayer(senate1718);
+            break;
+          default:
+        }
+        $(".fps-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2));
+        $(".avgDays-count").text((oregon.ad[schoolYear]).toFixed(2) + " Days");
+        $(".stuState-count").text(oregon.stu[schoolYear]).digits();
+        $(".school-count").text(oregon.s[schoolYear]).digits();
+        $(".sd-count").text("203").digits();
+        $(".days-count").text(daysAttended1718).digits();
+        $(".fpsState-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2)).digits();
+        $(".awardedState-count").text("$" + (oregon.treq[schoolYear]).toFixed(2)).digits();
+        $(".avgDaysState-count").text((oregon.ad[schoolYear]).toFixed(2) + " Days");
+        $("#placename").text("Oregon State");
 
       });
-      mymap.setZoom(7);
+
+      $("#house").on("click", function() {
+        geoLayer = 1;
+        $("#geoDropdown").text("House Districts");
+        mymap.removeLayer(house1718);
+        mymap.removeLayer(house1819);
+        mymap.removeLayer(senate1718);
+        mymap.removeLayer(senate1819);
+
+        switch (schoolYear) {
+          case 1:
+            mymap.addLayer(house1718);
+            break;
+          case 2:
+            mymap.addLayer(house1819);
+            break;
+          default:
+        }
+        $("#hint").click();
+        // $(".fps-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2));
+        // $(".avgDays-count").text((oregon.ad[schoolYear]).toFixed(2) + " Days");
+        // $("#placename").text("Oregon State");
+
+      });
+
+      $("#senate").on("click", function() {
+        geoLayer = 2;
+        $("#geoDropdown").text("Senate Districts");
+        mymap.removeLayer(house1718);
+        mymap.removeLayer(house1819);
+        mymap.removeLayer(senate1718);
+        mymap.removeLayer(senate1819);
+
+        switch (schoolYear) {
+          case 1:
+            mymap.addLayer(senate1718);
+            break;
+          case 2:
+            mymap.addLayer(senate1819);
+            break;
+          default:
+        }
+        $("#hint").click();
+        // $(".fps-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2));
+        // $(".avgDays-count").text((oregon.ad[schoolYear]).toFixed(2) + " Days");
+        // $("#placename").text("Oregon State");
+
+      });
+
     });
 
 
-    mymap.setZoom(6);
 
-        mymap.setZoom(6);
 
     /////////////////////////
     $(".leaflet-control-attribution")
       .css("background-color", "transparent")
-      .html("");
+      .html("This map waas created using leaflet");
   </script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z4T8FDH7B0"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
 
     gtag('config', 'G-Z4T8FDH7B0');
   </script>
-
 </body>
 
 </html>
