@@ -6,8 +6,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="ODS Explorer: Webmap Dashboard">
+  <meta name="author" content="Benji Antolin">
 
   <title>ODS Explorer</title>
 
@@ -69,15 +69,6 @@
 
           <h1 class="h3 mb-0 text-gray-800">Outdoor School Explorer</h1>
           <div class="topbar-divider d-none d-sm-block"></div>
-          <!-- <div class="dropdown card">
-            <button class="btn btn-secondary btn-sm dropdown-toggle" id="yearDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              2018-19
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" id="y201819" value="1">2018-19</a>
-              <a class="dropdown-item" id="y201718" value="2">2017-18</a>
-            </div>
-          </div> -->
           <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Export Data</a> -->
 
           <!-- Topbar Search -->
@@ -143,7 +134,9 @@
             </li>
 
           </ul>
-
+          <ul class="navbar-nav ml-auto">
+            <img src="img\OSU_Logo.png" height="50">
+          </ul>
         </nav>
         <!-- End of Topbar -->
 
@@ -159,7 +152,12 @@
             <div class="col-lg-3 mb-2">
               <div class="card text-white shadow">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary"><span id="placename">Oregon State</span> by-the-numbers for <span id="yearTitle">2018-19</span></h6>
+                  <h6 class="m-0 font-weight-bold text-primary">
+                    <span id="placename">Oregon State</span>
+                    by-the-numbers
+                    <br>
+                    for <span class="yearTitle">2018-19</span>
+                  </h6>
                 </div>
                 <div class="row">
                   <!-- Earnings (Monthly) Card Example -->
@@ -170,7 +168,9 @@
                           <div class="col mr-2">
                             <center>
                               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Funding per Student</div>
+                                Funding per Student
+                                <a data-toggle="modal" data-target="#fpsModal"><i class="info fas fa-question-circle"></i></a>
+                              </div>
                               <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="fps-count"></span></div>
                             </center>
                           </div>
@@ -187,7 +187,9 @@
                           <div class="col mr-2">
                             <center>
                               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Avg. Number of Days</div>
+                                Avg. Number of Days
+                                <a data-toggle="modal" data-target="#avdModal"><i class="info fas fa-question-circle"></i></a>
+                              </div>
                               <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="avgDays-count"></span></div>
                             </center>
                           </div>
@@ -203,7 +205,12 @@
                   <div class="col-lg-12">
                     <div class="card shadow">
                       <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Annual Count of Student Attending</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">
+                          Annual Count of Students Attending
+                          <a data-toggle="modal" data-target="#stuParModal">
+                            <i class="info fas fa-question-circle"></i>
+                          </a>
+                        </h6>
                       </div>
                       <div class="card-body">
                         <div class="chart-area">
@@ -217,7 +224,12 @@
                   <div class="col-lg-12">
                     <div class="card shadow">
                       <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Annual Dollars($) Awarded</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">
+                          Annual Dollars($) Awarded
+                          <a data-toggle="modal" data-target="#awardModal">
+                            <i class="info fas fa-question-circle"></i>
+                          </a>
+                        </h6>
                       </div>
                       <div class="card-body">
                         <div class="chart-area">
@@ -231,7 +243,12 @@
                   <div class="col-lg-12">
                     <div class="card shadow">
                       <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Program Length (Days & Nights)</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">
+                          Program Length (Days & Nights)
+                          <a data-toggle="modal" data-target="#plModal">
+                            <i class="info fas fa-question-circle"></i>
+                          </a>
+                        </h6>
                       </div>
                       <div class="card-body">
                         <div class="chart-area">
@@ -261,7 +278,9 @@
                           <div class="col mr-2">
                             <center>
                               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Students Funded</div>
+                                Students Funded
+                                <a data-toggle="modal" data-target="#tsfModal"><i class="info fas fa-question-circle"></i></a>
+                              </div>
                               <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="totStu-count"></span></div>
                             </center>
                           </div>
@@ -278,7 +297,9 @@
                           <div class="col mr-2">
                             <center>
                               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Amount Funded</div>
+                                Amount Funded
+                                <a data-toggle="modal" data-target="#tafModal"><i class="info fas fa-question-circle"></i></a>
+                              </div>
                               <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="totFund-count"></span></div>
                             </center>
                           </div>
@@ -290,7 +311,8 @@
                 <!-- Map -->
                 <div class="card shadow mb-4">
                   <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary"><i><span id="hint">Click on map to review district data</span></i></h6>
+                    <h6 class="m-0 font-weight-bold text-primary"><i><span id="hint">Click on map to review district data</span></i>
+                      <a data-toggle="modal" data-target="#stuParModal"><i class="info fas fa-question-circle"></i></a></h6>
                   </div>
                   <div class="card-body">
                     <div class="map-area">
@@ -306,7 +328,10 @@
             <div class="col-lg-2 mb-2">
               <div class="card text-white shadow">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Statewide by-the-numbers</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Statewide by-the-numbers
+                    <br>
+                    for <span class="yearTitle">2018-19</span>
+                  </h6>
                 </div>
                 <div class="row">
                   <!-- # of Students Card Example -->
@@ -317,7 +342,9 @@
                           <div class="col mr-2">
                             <center>
                               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Number of Students</div>
+                                Number of Students
+                                <a data-toggle="modal" data-target="#stuParModal"><i class="info fas fa-question-circle"></i></a>
+                              </div>
                               <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="stuState-count"></span></div>
                             </center>
                           </div>
@@ -335,7 +362,9 @@
                           <div class="col mr-2">
                             <center>
                               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Number of Schools</div>
+                                Number of Schools
+                                <a data-toggle="modal" data-target="#schoolParModal"><i class="info fas fa-question-circle"></i></a>
+                              </div>
                               <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="school-count"></span></div>
                             </center>
                           </div>
@@ -353,7 +382,9 @@
                           <div class="col mr-2">
                             <center>
                               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Dollars ($) Awarded</div>
+                                Dollars ($) Awarded
+                                <a data-toggle="modal" data-target="#awardModal"><i class="info fas fa-question-circle"></i></a>
+                              </div>
                               <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="awardedState-count"></span></div>
                             </center>
                           </div>
@@ -371,7 +402,9 @@
                           <div class="col mr-2">
                             <center>
                               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Number of Districts</div>
+                                Number of Districts
+                                <a data-toggle="modal" data-target="#sDistrictModal"><i class="info fas fa-question-circle"></i></a>
+                              </div>
                               <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="sd-count"></span></div>
                             </center>
                           </div>
@@ -391,7 +424,9 @@
                           <div class="col mr-2">
                             <center>
                               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Funding per Student</div>
+                                Funding per Student
+                                <a data-toggle="modal" data-target="#fpsModal"><i class="info fas fa-question-circle"></i></a>
+                              </div>
                               <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="fpsState-count"></span></div>
                             </center>
                           </div>
@@ -409,7 +444,9 @@
                           <div class="col mr-2">
                             <center>
                               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Avg. Number of Days</div>
+                                Avg. Number of Days
+                                <a data-toggle="modal" data-target="#avdModal"><i class="info fas fa-question-circle"></i></a>
+                              </div>
                               <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="avgDaysState-count"></span></div>
                             </center>
                           </div>
@@ -427,7 +464,9 @@
                           <div class="col mr-2">
                             <center>
                               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Number of Days Outside</div>
+                                Number of Days Outside
+                                <a data-toggle="modal" data-target="#dOutModal"><i class="info fas fa-question-circle"></i></a>
+                              </div>
                               <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="days-count"></span></div>
                             </center>
                           </div>
@@ -472,8 +511,8 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- NUMBER OF STUDENTS Modal-->
+  <div class="modal fade" id="stuParModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -496,6 +535,224 @@
       </div>
     </div>
   </div>
+
+  <!-- NUMBER OF STUDENTS Modal-->
+  <div class="modal fade" id="schoolParModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Number of Schools Participating</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Because the number of schools changes every year, this figure is a
+          simple count of the number of schools who applied for and received
+           outdoor school funding in a given school year.
+.
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- $ Awarded Modal-->
+  <div class="modal fade" id="awardModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Dollars ($) Awarded</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          This is the annual total or running total of dollars
+          awarded/reimbursed statewide or to qualifying agencies
+          (school districts, ESDs, and/or state-sponsored charters).
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SD participation Modal-->
+  <div class="modal fade" id="sDistrictModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Number of Districts (Participating)</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          At present, there are 197 school districts in the State of Oregon.
+          The Outdoor School program is permitted to fund school districts,
+          Education Service Districts (ESDs) (of which there are 19) and
+          state-sponsored charter schools (there are currently four).
+          While the total number of entities that could apply for outdoor
+          school funding is 220, we track only school districts
+          (even if an ESD applies for their funding) and state-sponsored
+          charter schools who apply for and receive funding from our program,
+          keeping our total number of potentially participating “districts”
+          at 201.
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Funding per Student Modal-->
+  <div class="modal fade" id="fpsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Funding per Student</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Our unit of cost for outdoor school is “dollars per student”,
+          so when looking at an amount funded for outdoor school -
+          either an overall average, a threshold amount, or a per
+          specific program average - we express those amounts in dollars
+          per student as well.
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Average Number of Days Modal-->
+  <div class="modal fade" id="avdModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Average Number of Days</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          The average length of program is a calculation of the average
+          length (in days) of the outdoor school programs attended by
+          5th and/or 6th grade students in a given year (or across years).
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Number of Days Outside Modal-->
+  <div class="modal fade" id="dOutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Number of Days Outside</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          The number of days outside is the number of students
+          who participated multiplied by the number of days
+          in the outdoor school program they attended.  So, for
+          a school that attended a 3-day 2-night program with
+          25 students, that school generated 75 days outside
+          for their students.
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Program Length (Days & Nights) Modal-->
+  <div class="modal fade" id="plModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Program Length (Days & Nights)</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Comparison of program lengths used - For data visualization purposes,
+          we track (count) the frequency of attendance for each of the most
+          typical outdoor school programs (such as 3-day 0-night, 3-day 2-night,
+          4-day 3-night, 5-day 4-night, etc.) in a given year.
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Total Students Funded Modal-->
+  <div class="modal fade" id="tsfModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Students Funded</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Each year we have an actual count of students funded from each
+          district's final report.  This number is the statewide running
+          total of each year’s annual number of students (5th and 6th grade)
+          receiving Outdoor School program funding for their outdoor school
+          experience.
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Total Amount Funded Modal-->
+  <div class="modal fade" id="tafModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Amount Funded</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          This is the running total of the annual dollars reimbursed to districts,
+          ESDs, and state-sponsored charter schools for the actual costs of their
+          outdoor school experiences. Because of the pandemic, this amount includes
+          (will include) non-refundable deposits and other district incurred costs
+          for outdoor school programs and facilities that had to be cancelled because
+          of state mandated COVID-19 restrictions in 2019-2020 and 2020-2021.
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -592,6 +849,7 @@
       })
       .addTo(mymap);
 
+
     new L.Control.zoomHome({
       position: 'topright'
     }).addTo(mymap);
@@ -642,9 +900,9 @@
       // Create Div Element and Populate it with HTML
       var div = L.DomUtil.create('div', 'legend');
       div.innerHTML += '<b>% of Students Participating<b><br>';
-      div.innerHTML += '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p>75-100%</p>';
-      div.innerHTML += '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p>50-74%</p>';
-      div.innerHTML += '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p> <50%</p>';
+      div.innerHTML += '<i class="choroLeg" style="background: ' + colors[2] + '; opacity: 0.5"></i><p>75-100%</p>';
+      div.innerHTML += '<i class="choroLeg" style="background: ' + colors[1] + '; opacity: 0.5"></i><p>50-74%</p>';
+      div.innerHTML += '<i class="choroLeg" style="background: ' + colors[0] + '; opacity: 0.5"></i><p> <50%</p>';
       div.innerHTML += '<hr><b>Schools<b><br>';
       div.innerHTML += '<i class="marker-cluster marker-cluster-small"></i><p> # of Schools</p>';
       // Return the Legend div containing the HTML content
@@ -653,6 +911,7 @@
 
     // 11. Add a legend to map
     legend.addTo(mymap);
+
 
     // Create object that can add school icon to the map through leaflet
     var schools1819 = new L.MarkerClusterGroup({
@@ -1462,7 +1721,8 @@
         layer.bindTooltip(feature.properties.NAMELSAD, {
           className: 'feature-label',
           permanent: false,
-          direction: 'center'
+          sticky: true,
+          direction: 'auto'
         });
 
       }
@@ -1531,7 +1791,6 @@
 
       function onMapClick(e) {
         $("#hint").click();
-
       }
 
       mymap.on('click', onMapClick);
@@ -1564,7 +1823,7 @@
           },
           y: {
             tick: {
-              format: d3.format(","),
+              format: d3.format(".1s"),
 
               count: 5,
               // values: [0,5000,10000,15000]
@@ -1608,7 +1867,7 @@
           },
           y: {
             tick: {
-              format: d3.format("$,"),
+              format: d3.format("$,.1s"),
               count: 5,
               // values: [0,5000,10000,15000]
             }
@@ -1629,20 +1888,69 @@
 
 
 
+      // chart = c3.generate({
+      //   data: {
+      //     columns: [
+      //       oregon.pL18, oregon.pL19
+      //     ],
+      //     type: 'bar',
+      //   },
+      //   bar: {
+      //     ratio: 0.25
+      //   },
+      //   legend: {
+      //     position: 'inset',
+      //     inset: {
+      //       anchor: "top-right",
+      //       y: 0,
+      //       step: 0
+      //     },
+      //   },
+      //   axis: {
+      //     x: {
+      //       type: "category",
+      //       tick: {
+      //         multiline: true
+      //       },
+      //       categories: ["3 Days 0 Nights", "4 Days 0 Nights", "3 Days 2 Nights",
+      //         "4 Days 3 Nights", "5 Days 4 Nights", "6 Days 5 Nights",
+      //       ],
+      //     },
+      //     y: {
+      //       label: {
+      //         text: 'Number of Students',
+      //         position: 'outer-middle'
+      //       },
+      //       tick: {
+      //         format: d3.format(".1s"),
+      //         count: 5,
+      //       },
+      //       min: 0,
+      //       padding: {
+      //         bottom: 0
+      //       },
+      //       type: 'linear'
+      //     }
+      //   },
+      //   tooltip: {
+      //     format: {
+      //       value: function(value, ratio, id) {
+      //         var format = id === 'data1' ? d3.format(',') : d3.format(',');
+      //         return format(value);
+      //       }
+      //     },
+      //     show: true,
+      //     grouped: false,
+      //   },
+      //   bindto: "#chart"
+      // });
+
       chart = c3.generate({
-        size: {
-          // height: chartHeight,
-          // width: 480
-        },
         data: {
-          // x: "t",
           columns: [
             oregon.pL18, oregon.pL19
           ],
           type: 'bar',
-        },
-        bar: {
-          ratio: 0.25
         },
         legend: {
           position: 'inset',
@@ -1655,30 +1963,25 @@
         axis: {
           x: {
             type: "category",
-            tick: {
-              multiline: true
-            },
             categories: ["3 Days 0 Nights", "4 Days 0 Nights", "3 Days 2 Nights",
               "4 Days 3 Nights", "5 Days 4 Nights", "6 Days 5 Nights",
             ],
           },
-          y: {
-            label: {
-              text: 'Number of Students',
-              position: 'outer-middle'
-            },
-            tick: {
-              format: d3.format(','),
-              count: 5,
-              // count: 10,
-              // values: [0,5000,10000,15000]
-            },
-            min: 0,
-            padding: {
-              bottom: 0
-            },
-            type: 'linear'
-          }
+              y: {
+                // label: {
+                //   text: 'Number of Students',
+                //   position: 'outer-middle'
+                // },
+                tick: {
+                  format: d3.format(".1s"),
+                  count: 5,
+                },
+                min: 0,
+                padding: {
+                  bottom: 0
+                },
+                type: 'linear'
+              }
         },
         tooltip: {
           format: {
@@ -1694,13 +1997,12 @@
       });
 
 
-
       /* When the user clicks on the button,
       toggle between hiding and showing the dropdown content */
       $("#y201819").on("click", function() {
         schoolYear = 2;
         $("#yearDropdown").text("2018-19");
-        $("#yearTitle").text("2018-19");
+        $(".yearTitle").text("2018-19");
         mymap.removeLayer(house1718);
         mymap.removeLayer(house1819);
         mymap.removeLayer(senate1718);
@@ -1732,7 +2034,7 @@
       $("#y201718").on("click", function() {
         schoolYear = 1;
         $("#yearDropdown").text("2017-18");
-        $("#yearTitle").text("2017-18");
+        $(".yearTitle").text("2017-18");
         // Remove Map Layers
         mymap.removeLayer(house1718);
         mymap.removeLayer(house1819);
