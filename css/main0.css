@@ -10,6 +10,7 @@
 html, body, main {
   font-family: 'stratum';
     height: 100vh;
+		position: relative;
 }
 
 .loader {
@@ -76,8 +77,9 @@ html, body, main {
 }
 
 .c3 text {
-  font-family: 'kievit';
+  font-family: 'kievit' 'Font Awesome 5 Free';
   font-size: .9rem;
+	content: 'f061'; /* FontAwesome Unicode */
 }
 
 .logo{
@@ -166,4 +168,46 @@ margin: 0;
 }
 a :hover {
 opacity: .8;
+}
+
+.dropdownTitle {
+	color: #000000;
+}
+
+#odsTitle {
+	color: #000000 !important;
+}
+.text-gray-800 {
+  color: #D73F09 !important
+}
+
+.text-gray-600 {
+  color: #D73F09 !important
+}
+
+.text-primary {
+  color: #000000 !important
+}
+
+.border-left-primary {
+  border-left: .25rem solid #D73F09 !important
+}
+.card-body{
+	padding: .25rem;
+}
+
+.text-gray-300{
+  color: #D73F09 !important
+}
+
+hr  {
+	border-color: #D73F09 !important;
+	margin-top: 0rem;
+	margin-bottom: .1rem;
+	margin-left: .8rem;
+	border-width: medium;
+}
+
+.fa-1x{
+	font-size: inherit;
 }

@@ -9700,7 +9700,7 @@ a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover {
 }
 
 .text-primary {
-  color: #4e73df !important
+  color: #4A773C !important
 }
 
 a.text-primary:focus, a.text-primary:hover {
@@ -10130,7 +10130,7 @@ a:focus {
 }
 
 .text-gray-600 {
-  color: #858796 !important
+  color: #4A773C !important
 }
 
 .text-gray-700 {
@@ -10138,7 +10138,7 @@ a:focus {
 }
 
 .text-gray-800 {
-  color: #5a5c69 !important
+  color: #AA9D2E !important
 }
 
 .text-gray-900 {
@@ -10155,7 +10155,7 @@ a:focus {
 }
 
 .border-left-primary {
-  border-left: .25rem solid #4e73df !important
+  border-left: .25rem solid #4A773C !important
 }
 
 .border-bottom-primary {
