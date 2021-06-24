@@ -13,6 +13,27 @@ html, body, main {
 		position: relative;
 }
 
+.yearColor .c3-bar-0 {
+   fill: #f0a14c!important;
+}
+.yearColor .c3-bar-1 {
+   fill:#e4702b!important;
+}
+.yearColor .c3-bar-2 {
+   fill: #d73f09!important;
+}
+
+#map > div.leaflet-control-container > div.leaflet-bottom.leaflet-right > div.legend.leaflet-control > i.marker-cluster.marker-cluster-small {
+	background-color: #e4702b;
+}
+
+#map > div.leaflet-control-container > div.leaflet-bottom.leaflet-right > div.legend.leaflet-control > hr {
+	border-color: gray !important;
+	margin-top: .1rem;
+    margin-left: .0rem;
+    border-width: thin;
+}
+
 .loader {
   position: fixed;
   width: 100%;

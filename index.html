@@ -223,7 +223,7 @@
                       </div>
                       <div class="card-body">
                         <div class="chart-area">
-                          <div id="stuChart" class="chart-height"></div>
+                          <div id="stuChart" class="chart-height yearColor"></div>
                         </div>
                       </div>
                     </div>
@@ -242,7 +242,7 @@
                       </div>
                       <div class="card-body">
                         <div class="chart-area">
-                          <div id="awardChart" class="chart-height"></div>
+                          <div id="awardChart" class="chart-height yearColor"></div>
                         </div>
                       </div>
                     </div>
@@ -949,7 +949,7 @@
       // Return the Legend div containing the HTML content
       return div;
     };
-
+document.querySelector("#map > div.leaflet-control-container > div.leaflet-bottom.leaflet-right > div.legend.leaflet-control > i.marker-cluster.marker-cluster-small")
     // 11. Add a legend to map
     legend.addTo(mymap);
 
@@ -1299,8 +1299,8 @@
         });
 
 
-        totalStudents = oregon.stu[1] + oregon.stu[2]+ oregon.stu[3];
-        totalFunded = oregon.treq[1] + oregon.treq[2]+ oregon.treq[3];
+        totalStudents = oregon.stu[1] + oregon.stu[2] + oregon.stu[3];
+        totalFunded = oregon.treq[1] + oregon.treq[2] + oregon.treq[3];
 
         $(".totStu-count").text(totalStudents).digits();
         $(".totFund-count").text("$" + totalFunded).digits();
@@ -1918,11 +1918,12 @@
         },
         data: {
           columns: [oregon.stu],
-          type: 'bar'
+          type: 'bar',
         },
-        color: {
-          pattern: ['#D3832B']
-        },
+        // color: {
+        //   pattern: ['#D3832B']
+        // },
+
         bar: {
           width: {
             ratio: 0.25 // this makes bar width 50% of length between ticks
@@ -1940,6 +1941,16 @@
             categories: ["2017-18", "2018-19", "2019-20"],
           },
           y: {
+            label: {
+                text: '# of Students',
+                position: 'outer-left'
+                // inner-right : default
+                // inner-center
+                // inner-left
+                // outer-right
+                // outer-center
+                // outer-left
+            },
             tick: {
               format: d3.format(".1s"),
 
@@ -1957,6 +1968,9 @@
           },
           show: true,
           grouped: false,
+        },
+        legend: {
+          show: false
         },
         bindto: "#stuChart"
       });
@@ -1988,6 +2002,16 @@
             categories: ["2017-18", "2018-19", "2019-20"],
           },
           y: {
+            label: {
+                text: '$ Awarded',
+                position: 'outer-left'
+                // inner-right : default
+                // inner-center
+                // inner-left
+                // outer-right
+                // outer-center
+                // outer-left
+            },
             tick: {
               format: d3.format("$,.1s"),
               count: 5,
@@ -2005,6 +2029,9 @@
           show: true,
           grouped: false,
         },
+        legend: {
+          show: false
+        },
         bindto: "#awardChart"
       });
       var day = '\u2600';
@@ -2021,7 +2048,7 @@
           space: 0.25
         },
         color: {
-          pattern: [colors[1], colors[2],colors[3] ]
+          pattern: [colors[1], colors[2], colors[3]]
         },
         // legend: {
         //   position: 'inset',
@@ -2042,10 +2069,16 @@
             categories: ["3,0", "4,0", "3,2", "4,3", "5,4", "6,5"],
           },
           y: {
-            // label: {
-            //   text: 'Number of Students',
-            //   position: 'outer-middle'
-            // },
+            label: {
+                text: '# of Students',
+                position: 'outer-left'
+                // inner-right : default
+                // inner-center
+                // inner-left
+                // outer-right
+                // outer-center
+                // outer-left
+            },
             tick: {
               format: d3.format(".1s"),
               count: 5,
@@ -2067,6 +2100,9 @@
           show: true,
           grouped: false,
         },
+//         zoom: {
+//     enabled: true
+// },
         bindto: "#chart"
       });
 
