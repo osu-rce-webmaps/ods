@@ -162,7 +162,7 @@
                 </div>
                 <div class="row">
                   <!-- Earnings (Monthly) Card Example -->
-                  <div class="col-xl-6 col-md-6 mb-1">
+                  <div class="col-xl-12 col-md-6 mb-1">
                     <div class="card border-left-primary shadow h-100 py-2">
                       <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -184,9 +184,10 @@
                       </div>
                     </div>
                   </div>
-
+                </div>
+                <div class="row">
                   <!-- Pending Requests Card Example -->
-                  <div class="col-xl-6 col-md-6 mb-1">
+                  <div class="col-xl-12 col-md-6 mb-1">
                     <div class="card border-left-primary shadow h-100 py-2">
                       <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -949,7 +950,7 @@
       // Return the Legend div containing the HTML content
       return div;
     };
-document.querySelector("#map > div.leaflet-control-container > div.leaflet-bottom.leaflet-right > div.legend.leaflet-control > i.marker-cluster.marker-cluster-small")
+    document.querySelector("#map > div.leaflet-control-container > div.leaflet-bottom.leaflet-right > div.legend.leaflet-control > i.marker-cluster.marker-cluster-small")
     // 11. Add a legend to map
     legend.addTo(mymap);
 
@@ -1681,7 +1682,7 @@ document.querySelector("#map > div.leaflet-control-container > div.leaflet-botto
       function zoomToFeature(e) {
         // mymap.fitBounds(e.target.getBounds());
         L.DomEvent.stopPropagation(e);
-        $("#hint").text("Click here to for State trend.");
+        $("#hint").text("Click here for State trend.");
 
         var t = ["Year"]
         var l = ["Program Length"]
@@ -1942,14 +1943,14 @@ document.querySelector("#map > div.leaflet-control-container > div.leaflet-botto
           },
           y: {
             label: {
-                text: '# of Students',
-                position: 'outer-left'
-                // inner-right : default
-                // inner-center
-                // inner-left
-                // outer-right
-                // outer-center
-                // outer-left
+              text: '# of Students',
+              position: 'outer-left'
+              // inner-right : default
+              // inner-center
+              // inner-left
+              // outer-right
+              // outer-center
+              // outer-left
             },
             tick: {
               format: d3.format(".1s"),
@@ -2003,14 +2004,14 @@ document.querySelector("#map > div.leaflet-control-container > div.leaflet-botto
           },
           y: {
             label: {
-                text: '$ Awarded',
-                position: 'outer-left'
-                // inner-right : default
-                // inner-center
-                // inner-left
-                // outer-right
-                // outer-center
-                // outer-left
+              text: '$ Awarded',
+              position: 'outer-left'
+              // inner-right : default
+              // inner-center
+              // inner-left
+              // outer-right
+              // outer-center
+              // outer-left
             },
             tick: {
               format: d3.format("$,.1s"),
@@ -2070,14 +2071,14 @@ document.querySelector("#map > div.leaflet-control-container > div.leaflet-botto
           },
           y: {
             label: {
-                text: '# of Students',
-                position: 'outer-left'
-                // inner-right : default
-                // inner-center
-                // inner-left
-                // outer-right
-                // outer-center
-                // outer-left
+              text: '# of Students',
+              position: 'outer-left'
+              // inner-right : default
+              // inner-center
+              // inner-left
+              // outer-right
+              // outer-center
+              // outer-left
             },
             tick: {
               format: d3.format(".1s"),
@@ -2100,9 +2101,9 @@ document.querySelector("#map > div.leaflet-control-container > div.leaflet-botto
           show: true,
           grouped: false,
         },
-//         zoom: {
-//     enabled: true
-// },
+        //         zoom: {
+        //     enabled: true
+        // },
         bindto: "#chart"
       });
 
