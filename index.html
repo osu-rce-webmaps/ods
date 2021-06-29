@@ -866,7 +866,7 @@
       maxZoom: 15,
       minZoom: 4,
       maxBounds: oregonBounds,
-      maxBoundsViscosity: .6,
+      maxBoundsViscosity: 1,
     }).fitBounds(oregonBounds);
 
     var geocoder = L.Control.geocoder({
@@ -1010,6 +1010,7 @@
       d3.json("assets/senateNewMin1920.geojson"), //datasets[6]
       d3.csv('assets/senateProgramLength.csv'), //datasets[7]
       d3.csv('assets/ODS_Explorer_20192020.csv'), //dataset [8]
+      d3.csv('assets/house1920_avgDaysUpdate.csv'), //dataset [9]
     ]).then(function(datasets) {
 
       $.fn.digits = function() {
@@ -1133,6 +1134,7 @@
       var pL2018 = ["2017-18"]
       var pL2019 = ["2018-19"]
       var pL2020 = ["2019-20"]
+      var avgDays1920 = ["Avg. Number of Days for 2019-20"]
 
       var oregon = {
         name: "Oregon",
@@ -1164,6 +1166,7 @@
         pL18: pL2018,
         pL19: pL2019,
         pL20: pL2020,
+        ad20: avgDays1920,
       }
 
 
@@ -1173,7 +1176,7 @@
           tone1 = 0, ttwo0 = 0, ttwo1 = 0, tthree0 = 0, tthree1 = 0,
           tthree2 = 0, tthree3 = 0, tfour0 = 0, tfour2 = 0, tfour3 = 0,
           tfour5 = 0, tfive0 = 0, tfive4 = 0, tsix0 = 0, tsix5 = 0,
-          tpl18 = 0, tpl19 = 0, tpl20 = 0;
+          tpl18 = 0, tpl19 = 0, tpl20 = 0, tad20 = 0;
         datasets[0].forEach(function(d) {
           t.push(d["Year"]);
           ts = 0, tstu = 0, tad = 0, ttreq = 0, treqs = 0,
@@ -1271,7 +1274,6 @@
           i["six5"].push(tsix5);
 
         });
-
         datasets[2].forEach(function(d) {
           l.push(d["Length"]);
           tpl18 = 0, tpl19 = 0, tpl20 = 0;
@@ -1298,6 +1300,26 @@
           i["pL19"].push(tpl19);
           i["pL20"].push(tpl20);
         });
+        datasets[9].forEach(function(d) {
+          l.push(d["houseID"]);
+          tad20 = 0;
+          current = d;
+          delete current["houseID"];
+          if (i["name"] = "Oregon") {
+            d = current[i["name"]];
+            if (d == undefined) {
+              d = "0"
+            };
+            items = d.split("-");
+            switch (items.length) {
+              case 1:
+                tad20 += +items[0];
+                break;
+            };
+
+          }
+          i["ad20"].push(tad20);
+        });
 
 
         totalStudents = oregon.stu[1] + oregon.stu[2] + oregon.stu[3];
@@ -1307,12 +1329,18 @@
         $(".totFund-count").text("$" + totalFunded).digits();
 
         $(".fps-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2));
-        $(".avgDays-count").text((oregon.ad[schoolYear]).toFixed(2) + " Days");
+
+        if (schoolYear == 3) {
+          $(".avgDays-count").text((oregon.ad20[1].toFixed(2)) + " Days");
+        } else {
+          $(".avgDays-count").text((oregon.ad[schoolYear].toFixed(2)) + " Days");
+        }
+
 
 
         $(".stuState-count").text(oregon.stu[schoolYear]).digits();
         $(".school-count").text(oregon.s[schoolYear]).digits();
-        $(".sd-count").text("199").digits();
+        $(".sd-count").text("173").digits();
         $(".days-count").text(daysAttended1920).digits();
         $(".fpsState-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2)).digits();
         $(".awardedState-count").text("$" + (oregon.treq[schoolYear]).toFixed(2)).digits();
@@ -1347,7 +1375,7 @@
           tone1 = 0, ttwo0 = 0, ttwo1 = 0, tthree0 = 0, tthree1 = 0,
           tthree2 = 0, tthree3 = 0, tfour0 = 0, tfour2 = 0, tfour3 = 0,
           tfour5 = 0, tfive0 = 0, tfive4 = 0, tsix0 = 0, tsix5 = 0,
-          tpl18 = 0, tpl19 = 0, tpl20 = 0;
+          tpl18 = 0, tpl19 = 0, tpl20 = 0, tad20 = 0;
 
 
         switch (geoLayer) {
@@ -1569,7 +1597,41 @@
           i["pL20"].push(tpl20);
         });
 
+        datasets[9].forEach(function(d) {
+          l.push(d["houseID"]);
+          tad20 = 0;
+          current = d;
+          delete current["houseID"];
+          if (i["name"] != "Oregon") {
+            d = current[i["name"]];
+            if (d == undefined) {
+              d = "0"
+            };
+            items = d.split("-");
+            switch (items.length) {
+              case 1:
+                tad20 += +items[0];
+                break;
+            };
 
+          } else {
+
+            Object.values(current).forEach(function(d) {
+              if (d == undefined) {
+                d = "0"
+              };
+              items = d.split("-");
+              switch (items.length) {
+                case 1:
+                  tad20 += +items[0];
+                  break;
+              };
+
+            });
+            //
+          }
+          i["ad20"].push(tad20);
+        });
 
 
         if (i["name"] == "Oregon") {
@@ -1715,6 +1777,7 @@
         var pL2018 = ["2017-18"]
         var pL2019 = ["2018-19"]
         var pL2020 = ["2019-20"]
+        var avgDays1920 = ["Avg. Number of Days for 2019-20"]
 
         var place = {
           name: e.target.feature.properties.geo,
@@ -1746,6 +1809,7 @@
           pL18: pL2018,
           pL19: pL2019,
           pL20: pL2020,
+          ad20: avgDays1920,
         }
 
         countyCounts(place);
@@ -1756,7 +1820,11 @@
 
         // $(".fps-count").text((e.target.feature.properties.reqStu2018)).toFixed(2);
         $(".fps-count").text("$" + (place.reqs[schoolYear]).toFixed(2));
-        $(".avgDays-count").text((place.ad[schoolYear]).toFixed(2) + " Days");
+        if (schoolYear == 3) {
+          $(".avgDays-count").text((place.ad20[1].toFixed(2)) + " Days");
+        } else {
+          $(".avgDays-count").text((place.ad[schoolYear].toFixed(2)) + " Days");
+        }
         $("#placename").text(e.target.feature.properties.NAMELSAD);
 
         stuChart.load({
@@ -1875,7 +1943,11 @@
       $("#hint").on("click", function() {
         // stateCounts(oregon);
         $(".fps-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2)).digits();
-        $(".avgDays-count").text((oregon.ad[schoolYear]).toFixed(2) + " Days");
+        if (schoolYear == 3) {
+          $(".avgDays-count").text((oregon.ad20[1].toFixed(2)) + " Days");
+        } else {
+          $(".avgDays-count").text((oregon.ad[schoolYear].toFixed(2)) + " Days");
+        }
 
 
         $("#placename").text("Oregon State");
@@ -2134,10 +2206,14 @@
           default:
         }
         $(".fps-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2));
-        $(".avgDays-count").text((oregon.ad[schoolYear]).toFixed(2) + " Days");
+        if (schoolYear == 3) {
+          $(".avgDays-count").text((oregon.ad20[1].toFixed(2)) + " Days");
+        } else {
+          $(".avgDays-count").text((oregon.ad[schoolYear].toFixed(2)) + " Days");
+        }
         $(".stuState-count").text(oregon.stu[schoolYear]).digits();
         $(".school-count").text(oregon.s[schoolYear]).digits();
-        $(".sd-count").text("199").digits();
+        $(".sd-count").text("173").digits();
         $(".days-count").text(daysAttended1920).digits();
         $(".fpsState-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2)).digits();
         $(".awardedState-count").text("$" + (oregon.treq[schoolYear]).toFixed(2)).digits();
