@@ -339,6 +339,20 @@
                     </div>
                   </div>
                 </div>
+                <div class="card text-white shadow">
+                  <div class="card-header py-3">
+                    <p class="m-0 font-weight-bold text-primary">*Why isn’t my school participating?</P>
+                      <p class="m-0 text-primary text-xs">
+                        All schools that qualify to receive Outdoor School funds are
+                        shown above (they have 5th or 6th grade students).  However,
+                        fewer schools participate in the Outdoor School funding program
+                        because the program funds each student only once. If your district
+                        chooses to apply for Outdoor School funding every year for 6th grade
+                        students, your district’s elementary schools would not participate;
+                        though your district is taking full advantage of available funding.
+                    </p>
+                  </div>
+                </div>
 
               </div>
             </div>
@@ -1026,7 +1040,7 @@
         if (parDummy == 1) {
           parText = "Yes"
         } else if (parDummy == 2) {
-          parText = "Cancelled"
+          parText = "Canceled"
         } else {
           parText = "No"
         };
@@ -1041,6 +1055,7 @@
           "<b>ODS Region: </b>" + d.ods_region + "<br>" +
           "<b>ODS Contact: </b>" + "<a href=" + d.ods_contact + " target='_blank'>" + d.ods_coordinator + "</a>"
         ).addTo(schools1920);
+
         var stuPar = 0;
         var numDays = 0;
         stuPar = d.Number_Attending;
@@ -1332,8 +1347,10 @@
 
         if (schoolYear == 3) {
           $(".avgDays-count").text((oregon.ad20[1].toFixed(2)) + " Days");
+          $(".avgDaysState-count").text((oregon.ad20[1].toFixed(2)) + " Days");
         } else {
           $(".avgDays-count").text((oregon.ad[schoolYear].toFixed(2)) + " Days");
+          $(".avgDaysState-count").text((oregon.ad[schoolYear].toFixed(2)) + " Days");
         }
 
 
@@ -1344,7 +1361,8 @@
         $(".days-count").text(daysAttended1920).digits();
         $(".fpsState-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2)).digits();
         $(".awardedState-count").text("$" + (oregon.treq[schoolYear]).toFixed(2)).digits();
-        $(".avgDaysState-count").text((oregon.ad[schoolYear]).toFixed(2) + " Days");
+
+
 
 
         // $(".stu-count").text(oregon.stu[2]).digits();
@@ -2208,16 +2226,18 @@
         $(".fps-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2));
         if (schoolYear == 3) {
           $(".avgDays-count").text((oregon.ad20[1].toFixed(2)) + " Days");
+          $(".avgDaysState-count").text((oregon.ad20[1].toFixed(2)) + " Days");
         } else {
           $(".avgDays-count").text((oregon.ad[schoolYear].toFixed(2)) + " Days");
+          $(".avgDaysState-count").text((oregon.ad[schoolYear].toFixed(2)) + " Days");
         }
+
         $(".stuState-count").text(oregon.stu[schoolYear]).digits();
         $(".school-count").text(oregon.s[schoolYear]).digits();
         $(".sd-count").text("173").digits();
         $(".days-count").text(daysAttended1920).digits();
         $(".fpsState-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2)).digits();
         $(".awardedState-count").text("$" + (oregon.treq[schoolYear]).toFixed(2)).digits();
-        $(".avgDaysState-count").text((oregon.ad[schoolYear]).toFixed(2) + " Days");
         $("#placename").text("Oregon State");
       });
 
@@ -2367,9 +2387,12 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CQ9R7P9JF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
-  
+
     gtag('config', 'G-3CQ9R7P9JF');
   </script>
 </body>
