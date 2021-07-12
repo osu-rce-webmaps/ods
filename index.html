@@ -162,7 +162,7 @@
                 </div>
                 <div class="row">
                   <!-- Earnings (Monthly) Card Example -->
-                  <div class="col-xl-12 col-md-6 mb-1">
+                  <div class="col-xl-12 col-md-12 ">
                     <div class="card border-left-primary shadow h-100 py-2">
                       <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -187,7 +187,7 @@
                 </div>
                 <div class="row">
                   <!-- Pending Requests Card Example -->
-                  <div class="col-xl-12 col-md-6 mb-1">
+                  <div class="col-xl-12 col-md-12">
                     <div class="card border-left-primary shadow h-100 py-2">
                       <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -282,7 +282,7 @@
                 </div>
                 <div class="row">
                   <!-- Totals - Students Funded Card Example -->
-                  <div class="col-xl-6 col-md-6 mb-1">
+                  <div class="col-xl-6 col-md-6 mb-0">
                     <div class="card border-left-primary shadow h-100 py-2">
                       <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -304,7 +304,7 @@
                   </div>
 
                   <!-- Pending Requests Card Example -->
-                  <div class="col-xl-6 col-md-6 mb-1">
+                  <div class="col-xl-6 col-md-6 mb-0">
                     <div class="card border-left-primary shadow h-100 py-2">
                       <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -367,7 +367,7 @@
                 </div>
                 <div class="row">
                   <!-- # of Students Card Example -->
-                  <div class="col-xl-12 col-md-12 mb-1">
+                  <div class="col-xl-12 col-md-12 mb-0">
                     <div class="card border-left-primary shadow h-100 py-2">
                       <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -390,7 +390,7 @@
                 </div>
                 <div class="row">
                   <!-- # of Schools Card Example -->
-                  <div class="col-xl-12 col-md-12 mb-1">
+                  <div class="col-xl-12 col-md-12 mb-0">
                     <div class="card border-left-primary shadow h-100 py-2">
                       <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -413,7 +413,7 @@
                 </div>
                 <div class="row">
                   <!-- $ Awarded Card Example -->
-                  <div class="col-xl-12 col-md-12 mb-1">
+                  <div class="col-xl-12 col-md-12 mb-0">
                     <div class="card border-left-primary shadow h-100 py-2">
                       <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -436,7 +436,7 @@
                 </div>
                 <div class="row">
                   <!-- # of Districts Card Example -->
-                  <div class="col-xl-12 col-md-12 mb-1">
+                  <div class="col-xl-12 col-md-12 mb-0">
                     <div class="card border-left-primary shadow h-100 py-2">
                       <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -461,7 +461,7 @@
                 <div class="row">
 
                   <!-- Funding per student Card Example -->
-                  <div class="col-xl-12 col-md-12 mb-1">
+                  <div class="col-xl-12 col-md-12 mb-0">
                     <div class="card border-left-primary shadow h-100 py-2">
                       <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -486,7 +486,7 @@
                 </div>
                 <div class="row">
                   <!-- Average # of Days Card Example -->
-                  <div class="col-xl-12 col-md-12 mb-1">
+                  <div class="col-xl-12 col-md-12 mb-0">
                     <div class="card border-left-primary shadow h-100 py-2">
                       <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -509,7 +509,7 @@
                 </div>
                 <div class="row">
                   <!-- Earnings (Monthly) Card Example -->
-                  <div class="col-xl-12 col-md-12 mb-1">
+                  <div class="col-xl-12 col-md-12 mb-0">
                     <div class="card border-left-primary shadow h-100 py-2">
                       <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -1341,7 +1341,7 @@
         totalFunded = oregon.treq[1] + oregon.treq[2] + oregon.treq[3];
 
         $(".totStu-count").text(totalStudents).digits();
-        $(".totFund-count").text("$" + totalFunded).digits();
+        $(".totFund-count").text("$" + (totalFunded).toFixed(2)).digits();
 
         $(".fps-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2));
 
