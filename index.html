@@ -1016,7 +1016,7 @@
 
     Promise.all([
       d3.csv('assets/houseTimeseries.csv'), //datasets[0]
-      d3.json("assets/houseNewMin1920.geojson"), //datasets[1]
+      d3.json("assets/house1920append.geojson"), //datasets[1]
       d3.csv('assets/houseProgLengthNew.csv'), //datasets[2]
       d3.csv('assets/ODS_Explorer_20182019.csv'), //dataset [3]
       d3.csv('assets/ODS_Explorer_20172018.csv'), //dataset [4]
@@ -1045,15 +1045,35 @@
           parText = "No"
         };
 
+        fifthDummy = d.No_5th_Grade;
+        fifthText = "null";
+
+        if (fifthDummy == "") {
+          fifthText = ""
+        } else {
+          fifthText = " students"
+        };
+
+        sixthDummy = d.No_6th_Grade;
+        sixthText = "null";
+
+        if (sixthDummy == "") {
+          sixthText = ""
+        } else {
+          sixthText = " students"
+        };
+
         L.marker([d.Y, d.X], {}).bindPopup(
           "<b>" + d.School_Nam + "</b> <p>" +
           "<b>Participate in Outdoor School in 2019-20?: </b>" + parText + "<br>" +
           "<b>Outdoor School Provider in 2019-20: </b>" + d.ODS_Provider + "<br>" +
           "<b>Outdoor School Provider in 2019-20: </b>" + d.Location + "<br>" +
+          "<b>Number of 5th Graders attending ODS: </b>" + d.No_5th_Grade + fifthText + "<br>" +
+          "<b>Number of 6th Graders attending ODS: </b>" + d.No_6th_Grade + sixthText + "<br>" +
           "<b>School District: </b>" + d.SD + "<br>" +
           "<b>ESD: </b>" + d.ESD + "<br>" +
           "<b>ODS Region: </b>" + d.ods_region + "<br>" +
-          "<b>ODS Contact: </b>" + "<a href=" + d.ods_contact + " target='_blank'>" + d.ods_coordinator + "</a>"
+          "<b>ODS Contact: </b>" + "<a href=" + d.ods_contact + " target='_blank'>" + d.ods_coordinator + "</a>",
         ).addTo(schools1920);
 
         var stuPar = 0;
@@ -1072,16 +1092,35 @@
         } else {
           parText = "No"
         };
+        fifthDummy = d.No_5th_Grade;
+        fifthText = "null";
+
+        if (fifthDummy == "") {
+          fifthText = ""
+        } else {
+          fifthText = " students"
+        };
+
+        sixthDummy = d.No_6th_Grade;
+        sixthText = "null";
+
+        if (sixthDummy == "") {
+          sixthText = ""
+        } else {
+          sixthText = " students"
+        };
 
         L.marker([d.Y, d.X], {}).bindPopup(
           "<b>" + d.School_Nam + "</b> <p>" +
-          "<b>Participate in Outdoor School in 2018-19?: </b>" + parText + "<br>" +
-          "<b>Outdoor School Provider in 2018-19: </b>" + d.ODS_Provider + "<br>" +
-          "<b>Outdoor School Provider in 2018-19: </b>" + d.Location + "<br>" +
+          "<b>Participate in Outdoor School in 2019-20?: </b>" + parText + "<br>" +
+          "<b>Outdoor School Provider in 2019-20: </b>" + d.ODS_Provider + "<br>" +
+          "<b>Outdoor School Provider in 2019-20: </b>" + d.Location + "<br>" +
+          "<b>Number of 5th Graders attending ODS: </b>" + d.No_5th_Grade + fifthText + "<br>" +
+          "<b>Number of 6th Graders attending ODS: </b>" + d.No_6th_Grade + sixthText + "<br>" +
           "<b>School District: </b>" + d.SD + "<br>" +
           "<b>ESD: </b>" + d.ESD + "<br>" +
           "<b>ODS Region: </b>" + d.ods_region + "<br>" +
-          "<b>ODS Contact: </b>" + "<a href=" + d.ods_contact + " target='_blank'>" + d.ods_coordinator + "</a>"
+          "<b>ODS Contact: </b>" + "<a href=" + d.ods_contact + " target='_blank'>" + d.ods_coordinator + "</a>",
         ).addTo(schools1819);
         var stuPar = 0;
         var numDays = 0;
@@ -1356,7 +1395,7 @@
 
 
         $(".stuState-count").text(oregon.stu[schoolYear]).digits();
-        $(".school-count").text(oregon.s[schoolYear]).digits();
+        $(".school-count").text(oregon.s[schoolYear]-3).digits();
         $(".sd-count").text("72").digits();
         $(".days-count").text(daysAttended1920).digits();
         $(".fpsState-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2)).digits();
@@ -1680,7 +1719,7 @@
 
       function styleHouse1920(feature) {
         return {
-          fillColor: setColor(feature.properties.perPar1920),
+          fillColor: setColor(feature.properties.p1920),
           fillOpacity: 0.4,
           weight: 2,
           opacity: 1,
@@ -2233,7 +2272,7 @@
         }
 
         $(".stuState-count").text(oregon.stu[schoolYear]).digits();
-        $(".school-count").text(oregon.s[schoolYear]).digits();
+        $(".school-count").text(oregon.s[schoolYear]-3).digits();
         $(".sd-count").text("72").digits();
         $(".days-count").text(daysAttended1920).digits();
         $(".fpsState-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2)).digits();
@@ -2305,7 +2344,7 @@
         $(".fps-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2));
         $(".avgDays-count").text((oregon.ad[schoolYear]).toFixed(2) + " Days");
         $(".stuState-count").text(oregon.stu[schoolYear]).digits();
-        $(".school-count").text(oregon.s[schoolYear]).digits();
+        $(".school-count").text(oregon.s[schoolYear]-5).digits();
         $(".sd-count").text("203").digits();
         $(".days-count").text(daysAttended1718).digits();
         $(".fpsState-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2)).digits();
