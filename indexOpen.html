@@ -107,13 +107,15 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Select Geography:</span>
-                <span id="geoDropdown" class="dropdownTitle">House Districts</span>
+                <span id="geoDropdown" class="dropdownTitle">County</span>
               </a>
               <!-- Dropdown - Geography Selection -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <center>
-                  <a class="dropdown-item" id="house" value="1">House Districts</a>
-                  <a class="dropdown-item" id="senate" value="2">Senate Districts</a>
+                  <a class="dropdown-item" id="county" value="1">County</a>
+                  <a class="dropdown-item" id="sd" value="2">School District</a>
+                  <a class="dropdown-item" id="esd" value="3">Education Service District</a>
+                  <a class="dropdown-item" id="odsRgn" value="4">ODS Region</a>
                 </center>
               </div>
             </li>
@@ -328,7 +330,7 @@
                 <!-- Map -->
                 <div class="card shadow">
                   <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary"><i><span id="hint">Click on map to review district data</span></i>
+                    <h6 class="m-0 font-weight-bold text-primary"><i><span id="hint">Click on map to review county data</span></i>
 
                     </h6>
                   </div>
@@ -342,14 +344,14 @@
                 <div class="card text-white shadow">
                   <div class="card-header py-3">
                     <p class="m-0 font-weight-bold text-primary">*Why isn’t my school participating?</P>
-                      <p class="m-0 text-primary text-xs">
-                        All schools that qualify to receive Outdoor School funds are
-                        shown above (they have 5th or 6th grade students).  However,
-                        fewer schools participate in the Outdoor School funding program
-                        because the program funds each student only once. If your district
-                        chooses to apply for Outdoor School funding every year for 6th grade
-                        students, your district’s elementary schools would not participate;
-                        though your district is taking full advantage of available funding.
+                    <p class="m-0 text-primary text-xs">
+                      All schools that qualify to receive Outdoor School funds are
+                      shown above (they have 5th or 6th grade students). However,
+                      fewer schools participate in the Outdoor School funding program
+                      because the program funds each student only once. If your district
+                      chooses to apply for Outdoor School funding every year for 6th grade
+                      students, your district’s elementary schools would not participate;
+                      though your district is taking full advantage of available funding.
                     </p>
                   </div>
                 </div>
@@ -1012,19 +1014,36 @@
       showCoverageOnHover: false,
     });
 
+    $.extend({
+      distinct: function(anArray) {
+        var result = [];
+        $.each(anArray, function(i, v) {
+          if ($.inArray(v, result) == -1) result.push(v);
+        });
+        return result;
+      }
+    });
+
+    counties1920 = [];
 
 
     Promise.all([
-      d3.csv('assets/houseTimeseries.csv'), //datasets[0]
-      d3.json("assets/house1920append.geojson"), //datasets[1]
-      d3.csv('assets/houseProgLengthNew.csv'), //datasets[2]
+      d3.csv('assets/countyTimeseries.csv'), //datasets[0]
+      d3.json("assets/countiesMin2019.geojson"), //datasets[1]
+      d3.csv('assets/countyProgLength.csv'), //datasets[2]
       d3.csv('assets/ODS_Explorer_20182019.csv'), //dataset [3]
       d3.csv('assets/ODS_Explorer_20172018.csv'), //dataset [4]
-      d3.csv('assets/senateTimeseries.csv'), //datasets[5]
-      d3.json("assets/senateNewMin1920.geojson"), //datasets[6]
-      d3.csv('assets/senateProgramLength.csv'), //datasets[7]
+      d3.csv('assets/esdTimeseries.csv'), //datasets[5]
+      d3.json("assets/esdMin2019.geojson"), //datasets[6]
+      d3.csv('assets/esdProgLength.csv'), //datasets[7]
       d3.csv('assets/ODS_Explorer_20192020.csv'), //dataset [8]
       d3.csv('assets/house1920_avgDaysUpdate.csv'), //dataset [9]
+      d3.csv('assets/sdTimeseriesUpdate.csv'), //datasets[10]
+      d3.json("assets/sdMin2019.geojson"), //datasets[11]
+      d3.csv('assets/sdProgLength.csv'), //datasets[12]
+      d3.csv('assets/odsTimeseries.csv'), //datasets[13]
+      d3.json("assets/odsMin2019.geojson"), //datasets[14]
+      d3.csv('assets/odsProgLength.csv'), //datasets[15]
     ]).then(function(datasets) {
 
       $.fn.digits = function() {
@@ -1032,6 +1051,15 @@
           $(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
         })
       }
+
+
+      // var county1920 = [];
+      // datasets[8].forEach(function(d) {
+      //   county1920.push(d.County);
+      // });
+      // var uniqueCounties = $.distinct(county1920);
+      // counties1920.push(uniqueCounties);
+
       var schoolLayer201920 = datasets[8].forEach(function(d) {
 
         parDummy = d.Participated;
@@ -1129,7 +1157,6 @@
         daysAttended1819 += (stuPar * numDays)
       })
 
-
       var schoolLayer201718 = datasets[4].forEach(function(d) {
         parDummy = d.Participated;
         parText = "null";
@@ -1154,8 +1181,6 @@
         numDays = d.Days;
         daysAttended1718 += (stuPar * numDays)
       })
-
-
 
       var t = ["Year"]
       var l = ["Program Length"]
@@ -1395,7 +1420,7 @@
 
 
         $(".stuState-count").text(oregon.stu[schoolYear]).digits();
-        $(".school-count").text(oregon.s[schoolYear]-3).digits();
+        $(".school-count").text(oregon.s[schoolYear] - 3).digits();
         $(".sd-count").text("72").digits();
         $(".days-count").text(daysAttended1920).digits();
         $(".fpsState-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2)).digits();
@@ -1437,12 +1462,24 @@
 
         switch (geoLayer) {
           case 1:
+            // county
             geoset = datasets[0];
             progSet = datasets[2];
             break;
           case 2:
+            // esd
             geoset = datasets[5];
             progSet = datasets[7];
+            break;
+          case 3:
+            // sd
+            geoset = datasets[10];
+            progSet = datasets[12];
+            break;
+          case 4:
+            // ods region
+            geoset = datasets[13];
+            progSet = datasets[15];
             break;
           default:
         }
@@ -1717,9 +1754,9 @@
         return color2[id];
       }
 
-      function styleHouse1920(feature) {
+      function stylecounty1920(feature) {
         return {
-          fillColor: setColor(feature.properties.p1920),
+          fillColor: setColor(feature.properties.par2019),
           fillOpacity: 0.4,
           weight: 2,
           opacity: 1,
@@ -1728,9 +1765,9 @@
         };
       }
 
-      function styleHouse1819(feature) {
+      function stylecounty1819(feature) {
         return {
-          fillColor: setColor(feature.properties.per_per2_1),
+          fillColor: setColor(feature.properties.par2018),
           fillOpacity: 0.4,
           weight: 2,
           opacity: 1,
@@ -1739,9 +1776,9 @@
         };
       }
 
-      function styleHouse1718(feature) {
+      function stylecounty1718(feature) {
         return {
-          fillColor: setColor(feature.properties.per_per201),
+          fillColor: setColor(feature.properties.par2017),
           fillOpacity: 0.4,
           weight: 2,
           opacity: 1,
@@ -1750,38 +1787,7 @@
         };
       }
 
-      function styleSenate1920(feature) {
-        return {
-          fillColor: setColor(feature.properties.perPar1920),
-          fillOpacity: 0.4,
-          weight: 2,
-          opacity: 1,
-          color: '#b4b4b4',
-          dashArray: '4'
-        };
-      }
 
-      function styleSenate1819(feature) {
-        return {
-          fillColor: setColor(feature.properties.p1819),
-          fillOpacity: 0.4,
-          weight: 2,
-          opacity: 1,
-          color: '#b4b4b4',
-          dashArray: '4'
-        };
-      }
-
-      function styleSenate1718(feature) {
-        return {
-          fillColor: setColor(feature.properties.p1718),
-          fillOpacity: 0.4,
-          weight: 2,
-          opacity: 1,
-          color: '#b4b4b4',
-          dashArray: '4'
-        };
-      }
 
       function highlightFeature(e) {
         // e indicates the current event
@@ -1837,7 +1843,7 @@
         var avgDays1920 = ["Avg. Number of Days for 2019-20"]
 
         var place = {
-          name: e.target.feature.properties.geo,
+          name: e.target.feature.properties.altName,
           s: schoolsPar,
           stu: stuPar,
           ad: avgDays,
@@ -1877,12 +1883,12 @@
 
         // $(".fps-count").text((e.target.feature.properties.reqStu2018)).toFixed(2);
         $(".fps-count").text("$" + (place.reqs[schoolYear]).toFixed(2));
-        if (schoolYear == 3) {
-          $(".avgDays-count").text((place.ad20[1].toFixed(2)) + " Days");
-        } else {
+        // if (schoolYear == 3 & geoset == 1) {
+        //   $(".avgDays-count").text((place.ad20[1].toFixed(2)) + " Days");
+        // } else {
           $(".avgDays-count").text((place.ad[schoolYear].toFixed(2)) + " Days");
-        }
-        $("#placename").text(e.target.feature.properties.NAMELSAD);
+        // }
+        $("#placename").text(e.target.feature.properties.instName);
 
         stuChart.load({
           unload: true,
@@ -1910,13 +1916,13 @@
           case 1:
             switch (schoolYear) {
               case 1:
-                house1718.resetStyle(e.target);
+                county1718.resetStyle(e.target);
                 break;
               case 2:
-                house1819.resetStyle(e.target);
+                county1819.resetStyle(e.target);
                 break;
               case 3:
-                house1920.resetStyle(e.target);
+                county1920.resetStyle(e.target);
                 break;
               default:
             }
@@ -1924,13 +1930,42 @@
           case 2:
             switch (schoolYear) {
               case 1:
-                senate1718.resetStyle(e.target);
+                esd1718.resetStyle(e.target);
                 break;
               case 2:
-                senate1819.resetStyle(e.target);
+                esd1819.resetStyle(e.target);
                 break;
               case 3:
-                senate1920.resetStyle(e.target);
+                esd1920.resetStyle(e.target);
+                break;
+              default:
+            }
+            break;
+          case 3:
+            switch (schoolYear) {
+              case 1:
+                sd1718.resetStyle(e.target);
+                break;
+              case 2:
+                sd1819.resetStyle(e.target);
+                break;
+              case 3:
+                sd1920.resetStyle(e.target);
+                break;
+              default:
+            }
+            break;
+
+          case 4:
+            switch (schoolYear) {
+              case 1:
+                ods1718.resetStyle(e.target);
+                break;
+              case 2:
+                ods1819.resetStyle(e.target);
+                break;
+              case 3:
+                ods1920.resetStyle(e.target);
                 break;
               default:
             }
@@ -1955,36 +1990,65 @@
 
       }
 
-      var house1920 = new L.GeoJSON(datasets[1], {
-        style: styleHouse1920,
+      var county1920 = new L.GeoJSON(datasets[1], {
+        style: stylecounty1920,
         onEachFeature: onEachFeature
       }).addTo(mymap);
 
-      var house1819 = new L.GeoJSON(datasets[1], {
-        style: styleHouse1819,
+      var county1819 = new L.GeoJSON(datasets[1], {
+        style: stylecounty1819,
         onEachFeature: onEachFeature
       });
 
-      var house1718 = new L.GeoJSON(datasets[1], {
-        style: styleHouse1718,
+      var county1718 = new L.GeoJSON(datasets[1], {
+        style: stylecounty1718,
         onEachFeature: onEachFeature
       });
 
-      var senate1920 = new L.GeoJSON(datasets[6], {
-        style: styleSenate1920,
+      var esd1920 = new L.GeoJSON(datasets[6], {
+        style: stylecounty1920,
         onEachFeature: onEachFeature
       });
 
-      var senate1819 = new L.GeoJSON(datasets[6], {
-        style: styleSenate1819,
+      var esd1819 = new L.GeoJSON(datasets[6], {
+        style: stylecounty1819,
         onEachFeature: onEachFeature
       });
 
-      var senate1718 = new L.GeoJSON(datasets[6], {
-        style: styleSenate1718,
+      var esd1718 = new L.GeoJSON(datasets[6], {
+        style: stylecounty1718,
         onEachFeature: onEachFeature
       });
 
+      var sd1920 = new L.GeoJSON(datasets[11], {
+        style: stylecounty1920,
+        onEachFeature: onEachFeature
+      });
+
+      var sd1819 = new L.GeoJSON(datasets[11], {
+        style: stylecounty1819,
+        onEachFeature: onEachFeature
+      });
+
+      var sd1718 = new L.GeoJSON(datasets[11], {
+        style: stylecounty1718,
+        onEachFeature: onEachFeature
+      });
+
+      var ods1920 = new L.GeoJSON(datasets[14], {
+        style: stylecounty1920,
+        onEachFeature: onEachFeature
+      });
+
+      var ods1819 = new L.GeoJSON(datasets[14], {
+        style: stylecounty1819,
+        onEachFeature: onEachFeature
+      });
+
+      var ods1718 = new L.GeoJSON(datasets[14], {
+        style: stylecounty1718,
+        onEachFeature: onEachFeature
+      });
 
 
       new L.control.layers(baseLayers, {
@@ -2243,22 +2307,34 @@
         schoolYear = 3;
         $("#yearDropdown").text("2019-20");
         $(".yearTitle").text("2019-20");
-        mymap.removeLayer(house1718);
-        mymap.removeLayer(house1819);
-        mymap.removeLayer(house1920);
-        mymap.removeLayer(senate1718);
-        mymap.removeLayer(senate1819);
-        mymap.removeLayer(senate1920);
+        mymap.removeLayer(county1718);
+        mymap.removeLayer(county1819);
+        mymap.removeLayer(county1920);
+        mymap.removeLayer(esd1718);
+        mymap.removeLayer(esd1819);
+        mymap.removeLayer(esd1920);
+        mymap.removeLayer(sd1718);
+        mymap.removeLayer(sd1819);
+        mymap.removeLayer(sd1920);
+        mymap.removeLayer(ods1718);
+        mymap.removeLayer(ods1819);
+        mymap.removeLayer(ods1920);
         mymap.removeLayer(schools1718);
         mymap.removeLayer(schools1819);
         mymap.addLayer(schools1920);
 
         switch (geoLayer) {
           case 1:
-            mymap.addLayer(house1920);
+            mymap.addLayer(county1920);
             break;
           case 2:
-            mymap.addLayer(senate1920);
+            mymap.addLayer(esd1920);
+            break;
+          case 3:
+            mymap.addLayer(sd1920);
+            break;
+          case 4:
+            mymap.addLayer(ods1920);
             break;
           default:
         }
@@ -2272,7 +2348,7 @@
         }
 
         $(".stuState-count").text(oregon.stu[schoolYear]).digits();
-        $(".school-count").text(oregon.s[schoolYear]-3).digits();
+        $(".school-count").text(oregon.s[schoolYear] - 3).digits();
         $(".sd-count").text("72").digits();
         $(".days-count").text(daysAttended1920).digits();
         $(".fpsState-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2)).digits();
@@ -2285,22 +2361,34 @@
         schoolYear = 2;
         $("#yearDropdown").text("2018-19");
         $(".yearTitle").text("2018-19");
-        mymap.removeLayer(house1718);
-        mymap.removeLayer(house1819);
-        mymap.removeLayer(house1920);
-        mymap.removeLayer(senate1718);
-        mymap.removeLayer(senate1819);
-        mymap.removeLayer(senate1920);
+        mymap.removeLayer(county1718);
+        mymap.removeLayer(county1819);
+        mymap.removeLayer(county1920);
+        mymap.removeLayer(esd1718);
+        mymap.removeLayer(esd1819);
+        mymap.removeLayer(esd1920);
+        mymap.removeLayer(sd1718);
+        mymap.removeLayer(sd1819);
+        mymap.removeLayer(sd1920);
+        mymap.removeLayer(ods1718);
+        mymap.removeLayer(ods1819);
+        mymap.removeLayer(ods1920);
         mymap.removeLayer(schools1718);
         mymap.removeLayer(schools1920);
         mymap.addLayer(schools1819);
 
         switch (geoLayer) {
           case 1:
-            mymap.addLayer(house1819);
+            mymap.addLayer(county1819);
             break;
           case 2:
-            mymap.addLayer(senate1819);
+            mymap.addLayer(esd1819);
+            break;
+          case 3:
+            mymap.addLayer(sd1920);
+            break;
+          case 4:
+            mymap.addLayer(ods1920);
             break;
           default:
         }
@@ -2321,12 +2409,18 @@
         $("#yearDropdown").text("2017-18");
         $(".yearTitle").text("2017-18");
         // Remove Map Layers
-        mymap.removeLayer(house1718);
-        mymap.removeLayer(house1819);
-        mymap.removeLayer(house1920);
-        mymap.removeLayer(senate1718);
-        mymap.removeLayer(senate1819);
-        mymap.removeLayer(senate1920);
+        mymap.removeLayer(county1718);
+        mymap.removeLayer(county1819);
+        mymap.removeLayer(county1920);
+        mymap.removeLayer(esd1718);
+        mymap.removeLayer(esd1819);
+        mymap.removeLayer(esd1920);
+        mymap.removeLayer(sd1718);
+        mymap.removeLayer(sd1819);
+        mymap.removeLayer(sd1920);
+        mymap.removeLayer(ods1718);
+        mymap.removeLayer(ods1819);
+        mymap.removeLayer(ods1920);
         mymap.removeLayer(schools1819);
         mymap.removeLayer(schools1920);
 
@@ -2334,17 +2428,23 @@
         mymap.addLayer(schools1718);
         switch (geoLayer) {
           case 1:
-            mymap.addLayer(house1718);
+            mymap.addLayer(county1718);
             break;
           case 2:
-            mymap.addLayer(senate1718);
+            mymap.addLayer(esd1718);
+            break;
+          case 3:
+            mymap.addLayer(sd1920);
+            break;
+          case 4:
+            mymap.addLayer(ods1920);
             break;
           default:
         }
         $(".fps-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2));
         $(".avgDays-count").text((oregon.ad[schoolYear]).toFixed(2) + " Days");
         $(".stuState-count").text(oregon.stu[schoolYear]).digits();
-        $(".school-count").text(oregon.s[schoolYear]-5).digits();
+        $(".school-count").text(oregon.s[schoolYear] - 5).digits();
         $(".sd-count").text("203").digits();
         $(".days-count").text(daysAttended1718).digits();
         $(".fpsState-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2)).digits();
@@ -2354,25 +2454,31 @@
 
       });
 
-      $("#house").on("click", function() {
+      $("#county").on("click", function() {
         geoLayer = 1;
-        $("#geoDropdown").text("House Districts");
-        mymap.removeLayer(house1718);
-        mymap.removeLayer(house1819);
-        mymap.removeLayer(house1920);
-        mymap.removeLayer(senate1718);
-        mymap.removeLayer(senate1819);
-        mymap.removeLayer(senate1920);
+        $("#geoDropdown").text("County");
+        mymap.removeLayer(county1718);
+        mymap.removeLayer(county1819);
+        mymap.removeLayer(county1920);
+        mymap.removeLayer(esd1718);
+        mymap.removeLayer(esd1819);
+        mymap.removeLayer(esd1920);
+        mymap.removeLayer(sd1718);
+        mymap.removeLayer(sd1819);
+        mymap.removeLayer(sd1920);
+        mymap.removeLayer(ods1718);
+        mymap.removeLayer(ods1819);
+        mymap.removeLayer(ods1920);
 
         switch (schoolYear) {
           case 1:
-            mymap.addLayer(house1718);
+            mymap.addLayer(county1718);
             break;
           case 2:
-            mymap.addLayer(house1819);
+            mymap.addLayer(county1819);
             break;
           case 3:
-            mymap.addLayer(house1920);
+            mymap.addLayer(county1920);
             break;
           default:
         }
@@ -2383,25 +2489,31 @@
 
       });
 
-      $("#senate").on("click", function() {
+      $("#esd").on("click", function() {
         geoLayer = 2;
-        $("#geoDropdown").text("Senate Districts");
-        mymap.removeLayer(house1718);
-        mymap.removeLayer(house1819);
-        mymap.removeLayer(house1920);
-        mymap.removeLayer(senate1718);
-        mymap.removeLayer(senate1819);
-        mymap.removeLayer(senate1920);
+        $("#geoDropdown").text("ESD");
+        mymap.removeLayer(county1718);
+        mymap.removeLayer(county1819);
+        mymap.removeLayer(county1920);
+        mymap.removeLayer(esd1718);
+        mymap.removeLayer(esd1819);
+        mymap.removeLayer(esd1920);
+        mymap.removeLayer(sd1718);
+        mymap.removeLayer(sd1819);
+        mymap.removeLayer(sd1920);
+        mymap.removeLayer(ods1718);
+        mymap.removeLayer(ods1819);
+        mymap.removeLayer(ods1920);
 
         switch (schoolYear) {
           case 1:
-            mymap.addLayer(senate1718);
+            mymap.addLayer(esd1718);
             break;
           case 2:
-            mymap.addLayer(senate1819);
+            mymap.addLayer(esd1819);
             break;
           case 3:
-            mymap.addLayer(senate1920);
+            mymap.addLayer(esd1920);
             break;
           default:
         }
@@ -2411,10 +2523,80 @@
         // $("#placename").text("Oregon State");
 
       });
+
+      $("#sd").on("click", function() {
+        geoLayer = 3;
+        $("#geoDropdown").text("School District");
+        mymap.removeLayer(county1718);
+        mymap.removeLayer(county1819);
+        mymap.removeLayer(county1920);
+        mymap.removeLayer(esd1718);
+        mymap.removeLayer(esd1819);
+        mymap.removeLayer(esd1920);
+        mymap.removeLayer(sd1718);
+        mymap.removeLayer(sd1819);
+        mymap.removeLayer(sd1920);
+        mymap.removeLayer(ods1718);
+        mymap.removeLayer(ods1819);
+        mymap.removeLayer(ods1920);
+
+        switch (schoolYear) {
+          case 1:
+            mymap.addLayer(sd1718);
+            break;
+          case 2:
+            mymap.addLayer(sd1819);
+            break;
+          case 3:
+            mymap.addLayer(sd1920);
+            break;
+          default:
+        }
+        $("#hint").click();
+        // $(".fps-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2));
+        // $(".avgDays-count").text((oregon.ad[schoolYear]).toFixed(2) + " Days");
+        // $("#placename").text("Oregon State");
+
+      });
+
+      $("#odsRgn").on("click", function() {
+        geoLayer = 4;
+        $("#geoDropdown").text("ODS Region");
+        mymap.removeLayer(county1718);
+        mymap.removeLayer(county1819);
+        mymap.removeLayer(county1920);
+        mymap.removeLayer(esd1718);
+        mymap.removeLayer(esd1819);
+        mymap.removeLayer(esd1920);
+        mymap.removeLayer(sd1718);
+        mymap.removeLayer(sd1819);
+        mymap.removeLayer(sd1920);
+        mymap.removeLayer(ods1718);
+        mymap.removeLayer(ods1819);
+        mymap.removeLayer(ods1920);
+
+        switch (schoolYear) {
+          case 1:
+            mymap.addLayer(ods1718);
+            break;
+          case 2:
+            mymap.addLayer(ods1819);
+            break;
+          case 3:
+            mymap.addLayer(ods1920);
+            break;
+          default:
+        }
+        $("#hint").click();
+        // $(".fps-count").text("$" + (oregon.reqs[schoolYear]).toFixed(2));
+        // $(".avgDays-count").text((oregon.ad[schoolYear]).toFixed(2) + " Days");
+        // $("#placename").text("Oregon State");
+
+      });
+
+
 
     });
-
-
 
 
     /////////////////////////
